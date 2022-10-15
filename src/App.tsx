@@ -28,6 +28,6 @@ const Wrapper = styled.div`
   max-width: 750px;
   min-width: 350px;
   margin: auto;
-
+  background-color: #fff;
 `
 export default App;
