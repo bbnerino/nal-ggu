@@ -13,9 +13,7 @@ function App() {
   return (
     <Wrapper>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/home2' element={<Home2/>}/>
-        <Route path='/start' element={<Start/>}/>
+        <Route path='/' element={<Start/>}/>
         <Route path='/location' element={<Location/>} />
         <Route path='/main' element={<Main/>}/>
         <Route path='/setup' element={<Setup/>}/>
