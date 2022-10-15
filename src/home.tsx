@@ -7,6 +7,7 @@ function Home() {
     <div className="App">
       <header className="App-header">
         <Link to={'/home2'} >
+          <h1 style={{"color":"white"}}>날꾸</h1>
           <img src='/assets/sun.png' className="App-logo" alt="logo" />
         </Link>
       </header>

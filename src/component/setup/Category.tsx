@@ -1,11 +1,18 @@
 import React from "react";
 
+import styled from "styled-components";
+
 const Category = () => {
   return (
-    <div>
-      <h1>카테고리 - 헤이든</h1>
-    </div>
+    <CategoryContainer>
+      <div>기온</div>
+      <div>비</div>
+      <div>해</div>
+      <div>대기질</div>
+    </CategoryContainer>
   );
 };
+
+const CategoryContainer = styled.div``;
 
 export default Category;
