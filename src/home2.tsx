@@ -46,7 +46,7 @@ interface Props{
   해윙 : number
 }
 
-const Home3:React.FC<Props> = ({해윙}) => {
+const Home3 = ({해윙}:Props) => {
   const [example,setExample] = useRecoilState(exampleState)
   return (
     <div>
