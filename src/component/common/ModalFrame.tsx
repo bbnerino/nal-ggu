@@ -2,6 +2,23 @@ import { type } from "os";
 import React from "react";
 import styled from "styled-components";
 
+interface IModal {
+  children: React.ReactNode;
+}
+
+const ModalFrame = ({ children, ...rest }: IModal) => {
+  return (
+    <Container>
+      <Background />
+      <ModalBlock {...rest}>
+        <Contents>{children}</Contents>
+      </ModalBlock>
+    </Container>
+  );
+};
+
+export default ModalFrame;
+
 const Container = styled.div`
   position: absolute;
   width: 100%;
@@ -41,12 +58,6 @@ const ModalBlock = styled.div`
   background-color: white;
   width: 20rem;
   height: 20rem;
-  @media (max-width: 1120px) {
-    width: 30rem;
-  }
-  @media (max-width: 50rem) {
-    width: 90%;
-  }
   min-height: 20rem;
   animation: modal-show 0.5s;
   @keyframes modal-show {
@@ -66,20 +77,3 @@ const Contents = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-interface IModal {
-  children: React.ReactNode;
-}
-
-const Modal = ({ children, ...rest }: IModal) => {
-  return (
-    <Container>
-      <Background />
-      <ModalBlock {...rest}>
-        <Contents>{children}</Contents>
-      </ModalBlock>
-    </Container>
-  );
-};
-
-export default Modal;
