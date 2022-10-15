@@ -24,9 +24,10 @@ function App() {
   );
 }
 const Wrapper = styled.div`
-  min-width: 750px;
-  max-width: 350px;
   width: 100%;
+  max-width: 750px;
+  min-width: 350px;
   margin: auto;
+  background-color: #fff;
 `
 export default App;
