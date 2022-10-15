@@ -10,7 +10,7 @@ const ModalFrame = ({ children, ...rest }: IModal) => {
   return (
     <Container>
       <Background />
-      <ModalBlock {...rest}>
+      <ModalBlock size="small" {...rest}>
         <Contents>{children}</Contents>
       </ModalBlock>
     </Container>
@@ -49,14 +49,18 @@ const Background = styled.div`
     }
   }
 `;
+interface IModalBlock {
+  size: "small" | "large";
+}
 
-const ModalBlock = styled.div`
+const ModalBlock = styled.div<IModalBlock>`
   position: absolute;
   top: 4rem;
   border-radius: 5px;
   padding: 0.5rem;
   background-color: white;
-  width: 20rem;
+  /* jaman - 모달 재횔용 시 저 30rem 부분을 수정하시면 됩니다! */
+  width: ${(props) => (props.size === "small" ? "20rem" : "30rem")};
   height: 20rem;
   min-height: 20rem;
   animation: modal-show 0.5s;

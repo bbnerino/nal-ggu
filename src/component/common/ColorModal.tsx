@@ -14,14 +14,10 @@ interface IColorModal {
   onhandleModal: () => void;
 }
 const ColorModal = ({ onhandleModal }: IColorModal) => {
-  // jaman: 임시로 넣은 선택된 색상 값입니다.
   const [selectedColor, setSelectedColor] = useState<string>("");
 
   const onhandleColor = (color: string) => {
     setSelectedColor(color);
-  };
-  const onhandleClose = () => {
-    onhandleModal();
   };
 
   return (
