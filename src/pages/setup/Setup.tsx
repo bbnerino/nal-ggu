@@ -4,6 +4,7 @@ import ColorModal from "../../component/common/ColorModal";
 import ModalFrame from "../../component/common/ModalFrame";
 import Category from "../../component/setup/Category";
 import Header from "../../component/setup/Header";
+import Select from "../../component/setup/Select";
 import Selected from "../../component/setup/Selected";
 import { dataState } from "../../store/state/example";
 
@@ -28,7 +29,8 @@ const Setup = () => {
   return (
     <div>
       <Header />
-      <Selected />
+      <Select />
+      {/* <Selected /> */}
       <Category />
       <button
         onClick={() => {
