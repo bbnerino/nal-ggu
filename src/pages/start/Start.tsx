@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import StartSelectBox from '../../component/start/startSelectBox';
@@ -143,6 +144,16 @@ const Start = () => {
     ],
   ];
 
+  const navigate = useNavigate();
+
+  const navigateSetup = () => {
+    navigate('/setup');
+  };
+
+  const navigateMain = () => {
+    navigate('/main');
+  };
+
   const setStoreInitialData = (id: string) => {
     setStartData(initialData[Number(id) - 1]);
   };
@@ -165,9 +176,11 @@ const Start = () => {
         <BoxWrapper>
           {presetData.presets.map((presetData) => (
             <div
+              key={presetData.id}
               style={{ width: '100%' }}
               onClick={() => {
                 setStoreInitialData(presetData.id);
+                navigateMain();
               }}
             >
               <StartSelectBox
@@ -179,11 +192,13 @@ const Start = () => {
             </div>
           ))}
           <Divider></Divider>
-          <StartSelectBox
-            title={presetData.selfCustom[0].title}
-            icon={presetData.selfCustom[0].icon}
-            color={presetData.selfCustom[0].color}
-          />
+          <div style={{ width: '100%' }} onClick={navigateSetup}>
+            <StartSelectBox
+              title={presetData.selfCustom[0].title}
+              icon={presetData.selfCustom[0].icon}
+              color={presetData.selfCustom[0].color}
+            />
+          </div>
         </BoxWrapper>
       </Wrapper>
     </>
@@ -198,6 +213,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 7rem;
   padding-right: 7rem;
+  cursor: pointer;
+  user-select: none;
 `;
 
 const LogoWrapper = styled.div`
