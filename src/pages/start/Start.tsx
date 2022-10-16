@@ -206,7 +206,6 @@ const Start = () => {
 };
 
 const Wrapper = styled.div`
-  background-color: mintcream;
   padding-top: 3rem;
   padding-bottom: 3rem;
   display: flex;
