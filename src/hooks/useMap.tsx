@@ -49,6 +49,23 @@ const Map = ({ address }: Props) => {
     // };
     // initMap();
   }, [address]);
+    const initMap = () => {
+      const { naver: any } = window;
+      if (!naver) return
+      
+      naver.maps.Service.geocode({
+        query : address 
+      }, (status, response) => {
+        if (status !== naver.maps.Service.Status.OK) {
+          return alert('Something wrong!');
+        }
+        console.log(response);
+        console.log(response.v2.addresses);
+        setResult(response.v2.addresses)
+      });
+    }
+    initMap();
+  }, [address])
 
   return result;
 };
