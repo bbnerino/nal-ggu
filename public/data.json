@@ -23,13 +23,6 @@
     },
     {
       "sort": "강수",
-      "category": "REH",
-      "title": "습도",
-      "size": "2",
-      "color": "#64B2E3"
-    },
-    {
-      "sort": "강수",
       "category": "SNO",
       "title": "1시간 신적설",
       "size": "2",
@@ -46,13 +39,6 @@
       "sort": "대기",
       "category": "SKY",
       "title": "하늘상태",
-      "size": "2",
-      "color": "#64B2E3"
-    },
-    {
-      "sort": "대기",
-      "category": "REH",
-      "title": "습도",
       "size": "2",
       "color": "#64B2E3"
     },
