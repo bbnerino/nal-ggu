@@ -20,20 +20,20 @@ const Wrapper = styled.nav`
   .header{
     position: fixed;
     width: 100%;
-    max-width: 750px;
-    min-width: 350px;
+    max-width: 47rem;
+    min-width: 22rem;
     background-color: #ffffff71;
-    height: 70px;
+    height: 4rem;
     box-shadow:0px 1px 10px #00000029;
     display: flex;
     align-items: center;
     .hamburger{
-      height: 40px;    
-      margin-left: 20px;
+      height: 2.5rem;    
+      margin-left: 1rem;
       cursor: pointer;
     }
     .location{
-      margin-left: 100px;
+      margin-left: 6rem;
     }
   }
 `
