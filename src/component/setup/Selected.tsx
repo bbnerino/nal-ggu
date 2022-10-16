@@ -9,13 +9,13 @@ const Selected = () => {
         <Item>
           <label htmlFor="fstSize">
             <RadioButton id="fstSize" type="radio" name="radio" />
-            1x1
+            <LabelText>1x1</LabelText>
           </label>
         </Item>
         <Item>
           <label htmlFor="sndSize">
             <RadioButton id="sndSize" type="radio" name="radio" />
-            2x1
+            <LabelText>2x1</LabelText>
           </label>
         </Item>
       </Wrapper>
@@ -67,3 +67,5 @@ const RadioButton = styled.input`
   border-radius: 50%;
   margin-right: 10px;
 `;
+
+const LabelText = styled.span``;
