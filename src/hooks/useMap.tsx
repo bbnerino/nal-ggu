@@ -32,12 +32,9 @@ const Map = ({ address }: Props) => {
 
   useEffect(() => {
     const initMap = () => {
-      const { naver: any } = window;
-      if (!naver) return
-      
       naver.maps.Service.geocode({
         query : address 
-      }, (status, response) => {
+      }, (status: any, response: any) => {
         if (status !== naver.maps.Service.Status.OK) {
           return alert('Something wrong!');
         }
