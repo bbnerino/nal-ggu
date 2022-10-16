@@ -9,18 +9,29 @@ const Select = () => {
   const [selected, setSelected] = useState<InfoData[]>([]);
 
   useEffect(() => {}, []);
-
-  console.log(selected);
-
+  const data = [
+    {
+      category: "POP",
+      color: "#64B2E3",
+      size: "2",
+      sort: "강수",
+      title: "ex1",
+    },
+    {
+      category: "POP",
+      color: "#64B2E3",
+      size: "2",
+      sort: "강수",
+      title: "ex2",
+    },
+  ];
   return (
     <Container>
       <Title>날꾸를 마음대로 꾸며주세요!</Title>
       <SelectContainer>
-        <SelectedCard />
-        {/* {selected?.map((list: InfoData) => (
-          <SelectedCard />
-          // <SelectedCard key={list.category} data={list} />
-        ))} */}
+        {data.map((data: InfoData, index: number) => (
+          <SelectedCard key={index} data={data} />
+        ))}
       </SelectContainer>
     </Container>
   );

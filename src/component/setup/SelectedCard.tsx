@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { InfoData } from "../../store/state/example";
 import ColorModal from "../common/ColorModal";
 import ModalFrame from "../common/ModalFrame";
 
-const SelectedCard = () => {
+interface Data {
+  data: InfoData;
+}
+const SelectedCard = ({ data }: Data) => {
   const [getSize, setSize] = useState<string>("");
   const [getCate, setCate] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -23,7 +27,7 @@ const SelectedCard = () => {
 
   return (
     <WeatherCategoryButton>
-      <p>sd</p>
+      <p>{data.title}</p>
       <Wrappper>
         <Item>
           <label htmlFor="fstSize">

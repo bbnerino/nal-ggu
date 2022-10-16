@@ -22,6 +22,8 @@ const Setup = () => {
     getData();
   }, []);
 
+  console.log(info);
+
   const oncloseModal = () => {
     setIsModalOpen(false);
   };
@@ -30,7 +32,6 @@ const Setup = () => {
     <div>
       <Header />
       <Select />
-      {/* <SelectedCard /> */}
       <Category />
       <button
         onClick={() => {
