@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 
 interface Props {
   address: string;
@@ -32,23 +31,6 @@ const Map = ({ address }: Props) => {
   const [result, setResult] = useState<AddressItemV2[]>();
 
   useEffect(() => {
-    // const initMap = () => {
-    //   naver.maps.Service.geocode(
-    //     {
-    //       query: address,
-    //     },
-    //     (status, response) => {
-    //       if (status !== naver.maps.Service.Status.OK) {
-    //         return alert("Something wrong!");
-    //       }
-    //       console.log(response);
-    //       console.log(response.v2.addresses);
-    //       setResult(response.v2.addresses);
-    //     }
-    //   );
-    // };
-    // initMap();
-  }, [address]);
     const initMap = () => {
       naver.maps.Service.geocode({
         query : address 
@@ -56,7 +38,6 @@ const Map = ({ address }: Props) => {
         if (status !== naver.maps.Service.Status.OK) {
           return alert('Something wrong!');
         }
-        console.log(response);
         console.log(response.v2.addresses);
         setResult(response.v2.addresses)
       });
