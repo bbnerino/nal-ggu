@@ -16,4 +16,3 @@ root.render(
       </RecoilRoot>
     </BrowserRouter>
 );
-

@@ -45,6 +45,9 @@
     ]
   },
   "devDependencies": {
+    "@types/navermaps": "^3.0.17",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/recoil": "^0.0.9",
     "@types/styled-components": "^5.1.26"
   }
 }
