@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 const color = [
   "#ECC332",
   "#FFA57A",
