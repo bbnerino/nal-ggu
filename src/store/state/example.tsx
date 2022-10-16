@@ -36,3 +36,30 @@ export const dataState = atom<InfoData[]>({
   key: "data",
   default: [],
 });
+
+export const dnd = atom<InfoData[]>({
+  key: "dnd",
+  default: [
+    {
+      sort: "강수",
+      category: "POP",
+      title: "강수확률",
+      size: "2",
+      color: "#64B2E3",
+    },
+    {
+      sort: "강수",
+      category: "PTY",
+      title: "강수형태",
+      size: "2",
+      color: "#64B2E3",
+    },
+    {
+      sort: "강수",
+      category: "PCP",
+      title: "1시간 강수량",
+      size: "2",
+      color: "#64B2E3",
+    },
+  ],
+});
