@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Selected = () => {
   return (
@@ -20,7 +20,7 @@ const Selected = () => {
         </Item>
       </Wrapper>
       <SelectColor></SelectColor>
-      <DragIcon>...</DragIcon>
+      <DotsImage src="/assets/dots.png" alt="dots" />
     </Box>
   );
 };
@@ -30,7 +30,7 @@ export default Selected;
 const Box = styled.div`
   display: flex;
   font-size: 2rem;
-  padding: 1em 2em;
+  padding: 1rem 2rem;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
@@ -41,13 +41,16 @@ const Category = styled.div`
   font-weight: bold;
 `;
 
-const DragIcon = styled.div``;
+const DotsImage = styled.img`
+  width: 1rem;
+  right: 0.5rem;
+`;
 
 const SelectColor = styled.div`
   background-color: #ecc332;
   border-radius: 50%;
-  width: 2em;
-  height: 2em;
+  width: 2rem;
+  height: 2rem;
   cursor: pointer;
 `;
 
@@ -58,14 +61,25 @@ const Wrapper = styled.div`
 const Item = styled.div`
   display: flex;
   align-items: center;
-  height: 48px;
-  position: relative;
 `;
-
-const RadioButton = styled.input`
+const RadioButton = styled.input.attrs({ type: "radio" })`
   opacity: 0;
-  border-radius: 50%;
-  margin-right: 10px;
 `;
 
-const LabelText = styled.span``;
+const LabelText = styled.span`
+  ${(props) => {
+    switch (props) {
+      default:
+        return css`
+          background-color: white;
+          color: black;
+          border-radius: 1.2rem;
+          height: 1.2em;
+          ${RadioButton}:checked + && {
+            background-color: purple;
+            color: white;
+          }
+        `;
+    }
+  }}
+`;
