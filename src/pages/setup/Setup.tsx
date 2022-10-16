@@ -3,7 +3,7 @@ import ColorModal from "../../component/common/ColorModal";
 import ModalFrame from "../../component/common/ModalFrame";
 import Category from "../../component/setup/Category";
 import Header from "../../component/setup/Header";
-import Selected from "../../component/setup/Selected";
+import SelectedCard from "../../component/setup/SelectedCard";
 
 const Setup = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -14,7 +14,7 @@ const Setup = () => {
   return (
     <div>
       <Header />
-      <Selected />
+      <SelectedCard />
       <Category />
       <button
         onClick={() => {
