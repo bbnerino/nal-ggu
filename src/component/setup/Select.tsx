@@ -1,38 +1,34 @@
 import React, { useEffect, useState } from "react";
+
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { dataState, InfoData } from "../../store/state/example";
+import { dataState, InfoData, testState } from "../../store/state/example";
 import SelectedCard from "./SelectedCard";
 
-const Select = () => {
-  const [info, setInfo] = useRecoilState(dataState);
-  const [selected, setSelected] = useState<InfoData[]>([]);
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
-  useEffect(() => {}, []);
-  const data = [
-    {
-      category: "POP",
-      color: "#64B2E3",
-      size: "2",
-      sort: "강수",
-      title: "ex1",
-    },
-    {
-      category: "POP",
-      color: "#64B2E3",
-      size: "2",
-      sort: "강수",
-      title: "ex2",
-    },
-  ];
+const Select = ({ cards }: any) => {
+  const [info, setInfo] = useRecoilState(dataState);
+  const [test, setTest] = useRecoilState(testState);
+
   return (
     <Container>
       <Title>날꾸를 마음대로 꾸며주세요!</Title>
-      <SelectContainer>
-        {data.map((data: InfoData, index: number) => (
-          <SelectedCard key={index} data={data} />
-        ))}
-      </SelectContainer>
+      {/* 드롭이 일어날 영역을 래핑 */}
+      <Droppable droppableId="cardlists">
+        {(provided) => (
+          <div
+            className="cardlists"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {cards.map((e: any, i: number) => (
+              <SelectedCard key={i} data={e} index={i} />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </Container>
   );
 };
@@ -53,4 +49,9 @@ const Title = styled.p`
 const SelectContainer = styled.div`
   background-color: green;
   padding: 2rem;
+`;
+
+const Check = styled.div`
+  width: 100%;
+  background-color: red;
 `;
