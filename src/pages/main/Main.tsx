@@ -185,7 +185,11 @@ const Main = () => {
       <MainHeader location={location.name} />
       <WeatherWrapper>
         {userSelectWeather.map((userWeather) => (
-          <WeatherBox userWeather={userWeather} weather={weather} />
+          <WeatherBox
+            userWeather={userWeather}
+            weather={weather}
+            key={userWeather.category}
+          />
         ))}
       </WeatherWrapper>
     </Wrapper>
