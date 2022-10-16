@@ -37,29 +37,34 @@ export const dataState = atom<InfoData[]>({
   default: [],
 });
 
-export const dnd = atom<InfoData[]>({
-  key: "dnd",
+export const testState = atom<InfoData[]>({
+  key: "test",
   default: [
     {
-      sort: "강수",
       category: "POP",
+      color: "#64B2E3",
+      size: "2",
+      sort: "강수",
       title: "강수확률",
-      size: "2",
-      color: "#64B2E3",
     },
     {
-      sort: "강수",
       category: "PTY",
-      title: "강수형태",
-      size: "2",
       color: "#64B2E3",
+      size: "2",
+      sort: "강수",
+      title: "강수형태",
     },
     {
-      sort: "강수",
       category: "PCP",
-      title: "1시간 강수량",
-      size: "2",
       color: "#64B2E3",
+      size: "2",
+      sort: "강수",
+      title: "1시간 강수량",
     },
   ],
+});
+
+export const sessionTriger = atom({
+  key: "sessionTriger",
+  default: false,
 });
