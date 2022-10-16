@@ -74,7 +74,7 @@ const LabelText = styled.span`
           background-color: white;
           color: black;
           border-radius: 1.2rem;
-          height: 1.2em;
+          height: 1.2rem;
           ${RadioButton}:checked + && {
             background-color: purple;
             color: white;
