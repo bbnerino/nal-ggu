@@ -12,7 +12,6 @@ const StartSelectBox = ({ title, icon, color }: Props) => {
     <Wrapper color={color}>
       <Icon>{icon}</Icon>
       <Title>{title}</Title>
-      <Color>{color}</Color>
     </Wrapper>
   );
 };
@@ -22,17 +21,24 @@ interface ColorProps {
 }
 
 const Wrapper = styled.div<ColorProps>`
-  border: solid 1px;
-  background-color: ${(props) => props.color};
+  display: flex;
+  border: solid ${(props) => props.color} 2px;
+  justify-content: center;
+  align-items: center;
   height: 5rem;
-  width: 30rem;
+  width: 100%;
   margin-bottom: 2rem;
+  border-radius: 30px;
 `;
 
-const Icon = styled.div``;
+const Icon = styled.div`
+  font-size: 2.5rem;
+  margin-right: 1rem;
+`;
 
-const Color = styled.div``;
-
-const Title = styled.span``;
+const Title = styled.span`
+  font-size: 1.7rem;
+  font-weight: bold;
+`;
 
 export default StartSelectBox;
