@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
 interface Props {
   address: string;
@@ -33,9 +32,12 @@ const Map = ({ address }: Props) => {
 
   useEffect(() => {
     const initMap = () => {
+      const { naver: any } = window;
+      if (!naver) return
+      
       naver.maps.Service.geocode({
         query : address 
-      }, function (status, response) {
+      }, (status, response) => {
         if (status !== naver.maps.Service.Status.OK) {
           return alert('Something wrong!');
         }
