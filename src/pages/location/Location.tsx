@@ -44,6 +44,8 @@ const state = atom({
 });
 
 const Location = () => {
+  return <div>Location</div>;
+};
   const [inputAddress, setInputAddress] = useState('');
   const [selectedAddress, setSelectedAddress] = useState(['']);
   const [, setSelectedFinalAddress] = useRecoilState(state)
@@ -95,4 +97,4 @@ const Location = () => {
   )
 }
 
-export default Location
+export default Location;

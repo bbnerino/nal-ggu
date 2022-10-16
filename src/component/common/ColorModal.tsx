@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 const color = [
   "#ECC332",
   "#FFA57A",
@@ -11,6 +12,7 @@ const color = [
   "#B0ABB7",
 ];
 interface IColorModal {
+  // color: string;
   onhandleModal: () => void;
 }
 const ColorModal = ({ onhandleModal }: IColorModal) => {
