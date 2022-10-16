@@ -23,8 +23,8 @@ function App() {
 }
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 750px;
-  min-width: 350px;
+  max-width: 47rem;
+  min-width: 22rem;
   margin: auto;
   background-color: #fff;
 `
