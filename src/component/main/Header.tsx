@@ -1,22 +1,38 @@
-import styled from "styled-components"
+import { useState } from "react";
+import styled from "styled-components";
+import SideBar from "../../component/SideBar";
 
-interface Props{
-  location:string
+interface Props {
+  location: string;
 }
 
-const MainHeader = ({location}:Props) => {
+const MainHeader = ({ location }: Props) => {
+  const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
+
+  const showSideBar = () => {
+    setIsOpenSideBar(!isOpenSideBar);
+  };
+
+  const hideSideBar = () => {
+    setIsOpenSideBar(false);
+  };
+
   return (
     <Wrapper>
       <div className="header">
-        <img className='hamburger' src='/assets/hamburger.png'/> 
-        <h1 className='location'>{location}</h1>
+        <img
+          className="hamburger"
+          src="/assets/hamburger.png"
+          onClick={showSideBar}
+        />
+        <h1 className="location">{location}</h1>
       </div>
+      <SideBar isOpenSideBar={isOpenSideBar} hideSideBar={hideSideBar} />
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.nav`
-  
   .header{
     position: fixed;
     width: 100%;
@@ -38,4 +54,4 @@ const Wrapper = styled.nav`
   }
 `
 
-export default MainHeader
+export default MainHeader;
