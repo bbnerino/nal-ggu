@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 interface Props {
   address: string;
@@ -9,18 +10,18 @@ interface AddressItemV2 {
   jibunAddress: string;
   englishAddress: string;
   addressElements: Array<{
-      code: string;
-      longName: string;
-      shortName: string;
-      types:
-      | 'SIDO'
-      | 'SIGUGUN'
-      | 'RI'
-      | 'ROAD_NAME'
-      | 'BUILDING_NUMBER'
-      | 'BUILDING_NAME'
-      | 'LAND_NUMBER'
-      | 'POSTAL_CODE';
+    code: string;
+    longName: string;
+    shortName: string;
+    types:
+      | "SIDO"
+      | "SIGUGUN"
+      | "RI"
+      | "ROAD_NAME"
+      | "BUILDING_NUMBER"
+      | "BUILDING_NAME"
+      | "LAND_NUMBER"
+      | "POSTAL_CODE";
   }>;
   x: string;
   y: string;
@@ -28,9 +29,26 @@ interface AddressItemV2 {
 }
 
 const Map = ({ address }: Props) => {
-  const [result, setResult] = useState<AddressItemV2[]>()
+  const [result, setResult] = useState<AddressItemV2[]>();
 
   useEffect(() => {
+    // const initMap = () => {
+    //   naver.maps.Service.geocode(
+    //     {
+    //       query: address,
+    //     },
+    //     (status, response) => {
+    //       if (status !== naver.maps.Service.Status.OK) {
+    //         return alert("Something wrong!");
+    //       }
+    //       console.log(response);
+    //       console.log(response.v2.addresses);
+    //       setResult(response.v2.addresses);
+    //     }
+    //   );
+    // };
+    // initMap();
+  }, [address]);
     const initMap = () => {
       naver.maps.Service.geocode({
         query : address 
@@ -46,7 +64,7 @@ const Map = ({ address }: Props) => {
     initMap();
   }, [address])
 
-  return result
-}
+  return result;
+};
 
-export default Map
+export default Map;
