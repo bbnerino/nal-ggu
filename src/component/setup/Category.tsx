@@ -1,46 +1,61 @@
-import React from 'react';
+import React, { useEffect } from "react";
 
-import styled from 'styled-components';
+import { useRecoilState } from "recoil";
+import { dataState } from "../../store/state/example";
+
+import styled from "styled-components";
 
 const Category = () => {
+  const [info, setInfo] = useRecoilState(dataState);
+
+  const getData = async () => {
+    const response = await fetch("/data.json", { method: "GET" });
+    const data = await response.json();
+    setInfo(data.data);
+  };
+
+  useEffect(() => {
+    getData();
+  });
+
+  const infoSort = (name: string) => {
+    let newArr = [];
+    for (let i = 0; i < info.length; i++) {
+      if (info.map((data) => data.sort)[i] === name) {
+        newArr.push(info[i]);
+      }
+    }
+    return newArr;
+  };
+
   return (
     <CategoryContainer>
       <WeatherCategory>
-        <WeatherCategoryTitle>🌞해</WeatherCategoryTitle>
-        <WeatherCategoryButton>
-          <span>일몰/일출</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>자외선지수</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
+        <WeatherCategoryTitle>🌤 대기</WeatherCategoryTitle>
+        {infoSort("대기").map((data) => (
+          <WeatherCategoryButton key={data.category}>
+            <span>{data.title}</span>
+            <DotsImage src="/assets/dots.png" alt="dots" />
+          </WeatherCategoryButton>
+        ))}
       </WeatherCategory>
       <WeatherCategory>
-        <WeatherCategoryTitle>☔️비</WeatherCategoryTitle>
-        <WeatherCategoryButton>
-          <span>강수확률</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>강수량</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
+        <WeatherCategoryTitle>☔️ 강수</WeatherCategoryTitle>
+        {infoSort("강수").map((data) => (
+          <WeatherCategoryButton key={data.category}>
+            <span>{data.title}</span>
+            <DotsImage src="/assets/dots.png" alt="dots" />
+          </WeatherCategoryButton>
+        ))}
       </WeatherCategory>
       <WeatherCategory>
-        <WeatherCategoryTitle>😷대기</WeatherCategoryTitle>
-        <WeatherCategoryButton>
-          <span>미세먼지</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>초미세먼지</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>황사</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
+        <WeatherCategoryTitle>💨 바람</WeatherCategoryTitle>
+        {infoSort("바람").map((data) => (
+          <WeatherCategoryButton key={data.category}>
+            <span>{data.title}</span>
+            <DotsImage src="/assets/dots.png" alt="dots" />
+          </WeatherCategoryButton>
+        ))}
       </WeatherCategory>
     </CategoryContainer>
   );
@@ -70,6 +85,7 @@ const DotsImage = styled.img`
   width: 1rem;
   position: absolute;
   right: 0.5rem;
+  cursor: pointer;
 `;
 
 export default Category;
