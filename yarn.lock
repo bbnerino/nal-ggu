@@ -1956,11 +1956,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/history@^4.7.11":
-  version "4.7.11"
-  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.11.tgz#56588b17ae8f50c53983a524fc3cc47437969d64"
-  integrity sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==
-
 "@types/hoist-non-react-statics@*":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
@@ -2042,9 +2037,9 @@
   integrity sha512-IOXCvVRToe7e0ny7HpT/X9Rb2RYtElG1a+VshjwT00HxrM2dWBApHQoqsI6WiY7Q03vdf2bCrIGzVrkF/5t10w==
 
 "@types/node@^16.11.65":
-  version "16.11.65"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.65.tgz#59500b86af757d6fcabd3dec32fecb6e357d7a45"
-  integrity sha512-Vfz7wGMOr4jbQGiQHVJm8VjeQwM9Ya7mHe9LtQ264/Epf5n1KiZShOFqk++nBzw6a/ubgYdB9Od7P+MH/LjoWw==
+  version "16.11.66"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.66.tgz#97f6891c3b8770e21163b93918d57fd1b799e235"
+  integrity sha512-+xvMrGl3eAygKcf5jm+4zA4tbfEgmKM9o6/glTmN0RFVdu2VuFXMYYtRmuv3zTGCgAYMnEZLde3B7BTp+Yxcig==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -2108,13 +2103,6 @@
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     csstype "^3.0.2"
-
-"@types/recoil@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@types/recoil/-/recoil-0.0.9.tgz#a5efceda791ee2720418e232445bb34f4f2e4be9"
-  integrity sha512-dXKcvdzQbkFCcULgxhtc/3shoCNqsspRUY1KwIUYcAzgS0qY7+IxlcjRjq+9PizFnzKrHESllkbezqCMstPmQA==
-  dependencies:
-    recoil "*"
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -3066,9 +3054,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001400, caniuse-lite@^1.0.30001407:
-  version "1.0.30001419"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001419.tgz#3542722d57d567c8210d5e4d0f9f17336b776457"
-  integrity sha512-aFO1r+g6R7TW+PNQxKzjITwLOyDhVRLjW0LcwS/HCZGUUKTGNp9+IwLC4xyDSZBygVL/mxaFR3HIV6wEKQuSzw==
+  version "1.0.30001420"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001420.tgz#f62f35f051e0b6d25532cf376776d41e45b47ef6"
+  integrity sha512-OnyeJ9ascFA9roEj72ok2Ikp7PHJTKubtEJIQ/VK3fdsS50q4KWy+Z5X0A1/GswEItKX0ctAp8n4SYDE7wTu6A==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -7565,7 +7553,7 @@ recoil-persist@^4.2.0:
   resolved "https://registry.yarnpkg.com/recoil-persist/-/recoil-persist-4.2.0.tgz#9fbb4a8c158cbb83ceb9dedf795aee24ed15395d"
   integrity sha512-MHVfML9GxJP3RpkKR4F5rp7DtvzIvjWhowtMao/b7h2k4afMio/4sMAdUtltIrDaeVegH0Iga8Sx5XQ3oD7CzA==
 
-recoil@*, recoil@^0.7.6:
+recoil@^0.7.6:
   version "0.7.6"
   resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.6.tgz#75297ecd70bbfeeb72e861aa6141a86bb6dfcd5e"
   integrity sha512-hsBEw7jFdpBCY/tu2GweiyaqHKxVj6EqF2/SfrglbKvJHhpN57SANWvPW+gE90i3Awi+A5gssOd3u+vWlT+g7g==
@@ -8275,6 +8263,11 @@ styled-components@^5.3.6:
     hoist-non-react-statics "^3.0.0"
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
+
+styled-reset@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.4.2.tgz#4da1becb2f6d22a2b22c7ee7ca09b739fe6a685f"
+  integrity sha512-VzVhEZHpO/CD/F5ZllqTAY+GTaKlNDZt5mTrtPf/kXZSe85+wMkhRIiPARgvCP9/HQMk+ZGaEWk1IkdP2SYAUQ==
 
 stylehacks@^5.1.0:
   version "5.1.0"

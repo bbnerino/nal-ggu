@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
 import './App.css';
 import Home from './home';
 import Home2 from './home2';
@@ -10,17 +11,21 @@ import Start from './pages/start/Start';
 
 function App() {
   return (
-    <div>
+    <Wrapper>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/home2' element={<Home2/>}/>
-        <Route path='/start' element={<Start/>}/>
+        <Route path='/' element={<Start/>}/>
         <Route path='/location' element={<Location/>} />
         <Route path='/main' element={<Main/>}/>
         <Route path='/setup' element={<Setup/>}/>
       </Routes>
-    </div>
+    </Wrapper>
   );
 }
-
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 47rem;
+  min-width: 22rem;
+  margin: auto;
+  background-color: #fff;
+`
 export default App;
