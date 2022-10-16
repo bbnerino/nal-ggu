@@ -1,14 +1,26 @@
 export class Weather{
-  type:string
-  size:number
-  color:string
-  percentage?:number
-  temperature? :number
-  low_temperature? : number
-  high_low_temperature? : number
+  baseDate?:string
+  baseTime?:string
+  category:string
+  fcstDate?:string
+  fcstTime?:string
+  fcstValue?:string
+  nx?:number 
+  ny?:number
   constructor(){
-    this.type='날씨'
-    this.size=1
-    this.color = '#333'
+    this.category = ''
+  }
+}
+
+export class UserWeather{
+  category: string
+  tilte: string
+  size: number
+  color:string
+  constructor(){
+    this.category='비'
+    this.tilte='강수량'
+    this.size = 1
+    this.color='#64B2E3'
   }
 }
