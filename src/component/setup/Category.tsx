@@ -31,7 +31,7 @@ const Category = () => {
   return (
     <CategoryContainer>
       <WeatherCategory>
-        <WeatherCategoryTitle>🌞대기</WeatherCategoryTitle>
+        <WeatherCategoryTitle>🌤 대기</WeatherCategoryTitle>
         {infoSort("대기").map((data) => (
           <WeatherCategoryButton key={data.category}>
             <span>{data.title}</span>
@@ -40,7 +40,7 @@ const Category = () => {
         ))}
       </WeatherCategory>
       <WeatherCategory>
-        <WeatherCategoryTitle>☔️강수</WeatherCategoryTitle>
+        <WeatherCategoryTitle>☔️ 강수</WeatherCategoryTitle>
         {infoSort("강수").map((data) => (
           <WeatherCategoryButton key={data.category}>
             <span>{data.title}</span>
@@ -49,7 +49,7 @@ const Category = () => {
         ))}
       </WeatherCategory>
       <WeatherCategory>
-        <WeatherCategoryTitle>😷바람</WeatherCategoryTitle>
+        <WeatherCategoryTitle>💨 바람</WeatherCategoryTitle>
         {infoSort("바람").map((data) => (
           <WeatherCategoryButton key={data.category}>
             <span>{data.title}</span>
