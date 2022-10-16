@@ -16,7 +16,7 @@ const Category = () => {
 
   useEffect(() => {
     getData();
-  });
+  }, []);
 
   const infoSort = (name: string) => {
     let newArr = [];

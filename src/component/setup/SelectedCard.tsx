@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { InfoData } from "../../store/state/example";
 import ColorModal from "../common/ColorModal";
 import ModalFrame from "../common/ModalFrame";
 
-const Selected = () => {
+interface Data {
+  data: InfoData;
+}
+const SelectedCard = ({ data }: Data) => {
   const [getSize, setSize] = useState<string>("");
   const [getCate, setCate] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const oncloseModal = () => {
     setIsModalOpen(false);
   };
+
   useEffect(() => {
     const sizeBox = document.getElementById("2");
     if (getSize === "1") {
@@ -19,9 +24,10 @@ const Selected = () => {
     }
     setCate("일출");
   });
+
   return (
     <WeatherCategoryButton>
-      <p>{getCate}</p>
+      <p>{data.title}</p>
       <Wrappper>
         <Item>
           <label htmlFor="fstSize">
@@ -55,7 +61,7 @@ const Selected = () => {
   );
 };
 
-export default Selected;
+export default SelectedCard;
 
 const WeatherCategoryButton = styled.button`
   ${(props) => props.theme.flex.flexBox()};

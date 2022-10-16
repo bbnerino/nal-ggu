@@ -37,7 +37,7 @@ const Map = ({ address }: Props) => {
     //     {
     //       query: address,
     //     },
-    //     function (status, response) {
+    //     (status, response) => {
     //       if (status !== naver.maps.Service.Status.OK) {
     //         return alert("Something wrong!");
     //       }

@@ -4,7 +4,7 @@ import ColorModal from "../../component/common/ColorModal";
 import ModalFrame from "../../component/common/ModalFrame";
 import Category from "../../component/setup/Category";
 import Header from "../../component/setup/Header";
-import Selected from "../../component/setup/Selected";
+import Select from "../../component/setup/Select";
 import { dataState } from "../../store/state/example";
 import SelectedCard from "../../component/setup/SelectedCard";
 
@@ -22,6 +22,8 @@ const Setup = () => {
     getData();
   }, []);
 
+  console.log(info);
+
   const oncloseModal = () => {
     setIsModalOpen(false);
   };
@@ -29,7 +31,7 @@ const Setup = () => {
   return (
     <div>
       <Header />
-      <SelectedCard />
+      <Select />
       <Category />
       <button
         onClick={() => {
@@ -38,7 +40,7 @@ const Setup = () => {
       >
         test modal
       </button>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <ModalFrame>
           <ColorModal
             onhandleModal={() => {
@@ -46,7 +48,7 @@ const Setup = () => {
             }}
           />
         </ModalFrame>
-      )}
+      )} */}
     </div>
   );
 };

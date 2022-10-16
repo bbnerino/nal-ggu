@@ -12,6 +12,7 @@ const color = [
   "#B0ABB7",
 ];
 interface IColorModal {
+  // color: string;
   onhandleModal: () => void;
 }
 const ColorModal = ({ onhandleModal }: IColorModal) => {
