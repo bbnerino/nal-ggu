@@ -1,20 +1,30 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import StartSelectBox from '../../component/start/startSelectBox';
+import { startState } from '../../store/state/startData';
 import theme from '../../styles/theme';
 
+interface Props {
+  title: string;
+  icon: string;
+  color: string;
+  onClick: () => void;
+}
+
 const Start = () => {
+  const [startData, setStartData] = useRecoilState(startState);
   const presetData = {
     presets: [
-      { id: '1', title: '비가 오는지 궁금해요', icon: '☔', color: '#609FFF' },
+      { id: '1', title: '우산을 챙겨야할까요?', icon: '☔', color: '#609FFF' },
       {
         id: '2',
-        title: '달릴만한 날씨인지 궁금해요',
+        title: '지금 달려도 괜찮을까요?',
         icon: '🏃',
         color: '#FF7A7A',
       },
-      { id: '3', title: '미세먼지가 궁금해요', icon: '😷', color: '#B470EA' },
-      { id: '4', title: '선크림 발라야 할까요?', icon: '🌞', color: '#FFC42E' },
+      { id: '3', title: '하늘상태가 어떤가요?', icon: '😷', color: '#B470EA' },
+      { id: '4', title: '꿉꿉하진 않을까요?', icon: '🌞', color: '#FFC42E' },
       { id: '5', title: '아무렇게나 해줘', icon: '🛏️', color: '#61C3A0' },
     ],
     selfCustom: [
@@ -22,11 +32,82 @@ const Start = () => {
     ],
   };
 
+  const initialData = [
+    [
+      {
+        sort: '비',
+        category: 'POP',
+        title: '강수확률',
+        size: '2',
+        color: '#64B2E3',
+      },
+      {
+        sort: '비',
+        category: 'PCP',
+        title: '1시간 강수량',
+        size: '2',
+        color: '#64B2E3',
+      },
+    ],
+    [
+      {
+        sort: '비',
+        category: 'POP',
+        title: '강수확률',
+        size: '2',
+        color: '#64B2E3',
+      },
+      {
+        sort: '대기',
+        category: 'TMP',
+        title: '1시간 기온',
+        size: '2',
+        color: '#64B2E3',
+      },
+    ],
+    [
+      {
+        sort: '대기',
+        category: 'SKY',
+        title: '하늘상태',
+        size: '2',
+        color: '#64B2E3',
+      },
+      {
+        sort: '대기',
+        category: 'TMP',
+        title: '1시간 기온',
+        size: '2',
+        color: '#64B2E3',
+      },
+    ],
+    [
+      {
+        sort: '비',
+        category: 'REH',
+        title: '습도',
+        size: '2',
+        color: '#64B2E3',
+      },
+      {
+        sort: '비',
+        category: 'POP',
+        title: '강수확률',
+        size: '2',
+        color: '#64B2E3',
+      },
+    ],
+  ];
+
+  const setStoreInitialData = (id: string) => {
+    setStartData(initialData[Number(id) - 1]);
+  };
+
   return (
     <>
       <Wrapper>
         <LogoWrapper>
-          <Logo src='/assets/sun.png' />
+          <Logo src="/assets/sun.png" />
           <AppTitle>NALGGU</AppTitle>
         </LogoWrapper>
         <HelloWrapper>
@@ -39,12 +120,18 @@ const Start = () => {
         </HelloWrapper>
         <BoxWrapper>
           {presetData.presets.map((presetData) => (
-            <StartSelectBox
-              key={presetData.id}
-              title={presetData.title}
-              icon={presetData.icon}
-              color={presetData.color}
-            />
+            <div
+              onClick={() => {
+                setStoreInitialData(presetData.id);
+              }}
+            >
+              <StartSelectBox
+                key={presetData.id}
+                title={presetData.title}
+                icon={presetData.icon}
+                color={presetData.color}
+              />
+            </div>
           ))}
           <Divider></Divider>
           <StartSelectBox
