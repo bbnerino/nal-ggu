@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
 const Category = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch("/data.json", {
+        method: "GET",
+      });
+      const data = await response.json();
+      setData(data.data);
+    };
+    getData();
+  }, []);
+
+  console.log(data);
+
   return (
     <CategoryContainer>
       <WeatherCategory>
         <WeatherCategoryTitle>🌞해</WeatherCategoryTitle>
         <WeatherCategoryButton>
           <span>일몰/일출</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>자외선지수</span>
           <DotsImage src="/assets/dots.png" alt="dots" />
         </WeatherCategoryButton>
       </WeatherCategory>
@@ -22,23 +33,11 @@ const Category = () => {
           <span>강수확률</span>
           <DotsImage src="/assets/dots.png" alt="dots" />
         </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>강수량</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
       </WeatherCategory>
       <WeatherCategory>
         <WeatherCategoryTitle>😷대기</WeatherCategoryTitle>
         <WeatherCategoryButton>
           <span>미세먼지</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>초미세먼지</span>
-          <DotsImage src="/assets/dots.png" alt="dots" />
-        </WeatherCategoryButton>
-        <WeatherCategoryButton>
-          <span>황사</span>
           <DotsImage src="/assets/dots.png" alt="dots" />
         </WeatherCategoryButton>
       </WeatherCategory>
