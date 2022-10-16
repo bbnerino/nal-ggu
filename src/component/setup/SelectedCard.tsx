@@ -3,11 +3,13 @@ import styled, { css } from "styled-components";
 import { InfoData } from "../../store/state/example";
 import ColorModal from "../common/ColorModal";
 import ModalFrame from "../common/ModalFrame";
+import { Draggable } from "react-beautiful-dnd";
 
 interface Data {
   data: InfoData;
+  index: number;
 }
-const SelectedCard = ({ data }: Data) => {
+const SelectedCard = ({ data, index }: Data) => {
   const [getSize, setSize] = useState<string>("");
   const [getCate, setCate] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -26,44 +28,61 @@ const SelectedCard = ({ data }: Data) => {
   });
 
   return (
-    <WeatherCategoryButton>
-      <p>{data.title}</p>
-      <Wrappper>
-        <Item>
-          <label htmlFor="fstSize">
-            <RadioButton id="fstSize" type="radio" name="radio" />
-            <LabelText id="1">1x1</LabelText>
-          </label>
-        </Item>
-        <Item>
-          <label htmlFor="sndSize">
-            <RadioButton id="sndSize" type="radio" name="radio" />
-            <LabelText id="2">2x1</LabelText>
-          </label>
-        </Item>
-        <SelectColor
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        ></SelectColor>
-        <DotsImage src="/assets/dots.png" alt="dots" />
-        {isModalOpen ? (
-          <ModalFrame>
-            <ColorModal
-              onhandleModal={() => {
-                oncloseModal();
-              }}
-            />
-          </ModalFrame>
-        ) : null}
-      </Wrappper>
-    </WeatherCategoryButton>
+    <Draggable
+      draggableId={`test-${data.category}`}
+      index={index}
+      key={`test-${data.category}`}
+    >
+      {(provided) => {
+        return (
+          <div
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
+            <WeatherCategoryButton>
+              <p>{data.title}</p>
+              <Wrappper>
+                <Item>
+                  <label htmlFor="fstSize">
+                    <RadioButton id="fstSize" type="radio" name="radio" />
+                    <LabelText id="1">1x1</LabelText>
+                  </label>
+                </Item>
+                <Item>
+                  <label htmlFor="sndSize">
+                    <RadioButton id="sndSize" type="radio" name="radio" />
+                    <LabelText id="2">2x1</LabelText>
+                  </label>
+                </Item>
+                <SelectColor
+                  onClick={() => {
+                    setIsModalOpen(true);
+                  }}
+                ></SelectColor>
+                <DotsImage src="/assets/dots.png" alt="dots" />
+                {isModalOpen ? (
+                  <ModalFrame>
+                    <ColorModal
+                      onhandleModal={() => {
+                        oncloseModal();
+                      }}
+                    />
+                  </ModalFrame>
+                ) : null}
+              </Wrappper>
+            </WeatherCategoryButton>
+          </div>
+        );
+      }}
+    </Draggable>
   );
 };
 
 export default SelectedCard;
 
-const WeatherCategoryButton = styled.button`
+const WeatherCategoryButton = styled.div`
+  background-color: green;
   ${(props) => props.theme.flex.flexBox()};
   width: 100%;
   margin: 0.3rem 0 1rem 0;
