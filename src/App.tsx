@@ -13,9 +13,7 @@ function App() {
   return (
     <Wrapper>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/home2' element={<Home2/>}/>
-        <Route path='/start' element={<Start/>}/>
+        <Route path='/' element={<Start/>}/>
         <Route path='/location' element={<Location/>} />
         <Route path='/main' element={<Main/>}/>
         <Route path='/setup' element={<Setup/>}/>
@@ -24,9 +22,10 @@ function App() {
   );
 }
 const Wrapper = styled.div`
-  min-width: 750px;
-  max-width: 350px;
   width: 100%;
+  max-width: 750px;
+  min-width: 350px;
   margin: auto;
+  background-color: #fff;
 `
 export default App;
