@@ -31,4 +31,8 @@ interface InfoData {
   size: string;
   color: string;
 }
-export const dataState = atom<InfoData[]>({ key: "data", default: [] });
+
+export const dataState = atom<InfoData[]>({
+  key: "data",
+  default: [],
+});

@@ -1,16 +1,15 @@
 import styled from 'styled-components'
-import { Weather } from '../../type'
+import { UserWeather, Weather } from '../../type'
 
 interface Props{
-  weather:Weather
+  weather:UserWeather
 }
 
 const WeatherBox = ({weather}:Props) => {
   return (
     <Wrapper size={weather.size===1 ? "40%":"90%"} color={weather.color} >
-      <div>{weather.type}</div>
-      <h1>{weather.percentage&&`${weather.percentage}%`}</h1>
-      <h1>{weather.temperature&&`${weather.temperature}°C`}</h1>
+      <div>{weather.category}</div>
+      <div>{weather.tilte}°C</div>
     </Wrapper>
   )
 }
@@ -21,20 +20,21 @@ interface IweatherBox{
 }
 
 const Wrapper = styled.div<IweatherBox>`
-  padding: 20px;
+  padding: 1rem;
   background-color: ${props=>props.color};
-  height: 240px;
+  height: 15rem;
   width: ${props=>props.size};
-  margin: 40px 5%;
+  margin: 2.5rem 5%;
   border-radius: 10px;
-  font-size: 30px;
+  font-size: 2rem;
   h1{
-    font-size: 70px;
-    margin-top: 20px;
+    font-size: 5rem;
+    margin-top: 1.5rem;
   }
   color: white;
-  @media screen and (max-width: 500px) {
-    height: 150px;
+  @media screen and (max-width: 32rem) {
+    height: 10rem;
+    font-size: 1rem;
   } 
 `
 
