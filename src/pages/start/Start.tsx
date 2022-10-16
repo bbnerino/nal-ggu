@@ -6,11 +6,16 @@ import theme from '../../styles/theme';
 const Start = () => {
   const presetData = {
     presets: [
-      { title: '비가 오는지 궁금해요', icon: '☔', color: '#609FFF' },
-      { title: '달릴만한 날씨인지 궁금해요', icon: '🏃', color: '#FF7A7A' },
-      { title: '미세먼지가 궁금해요', icon: '😷', color: '#B470EA' },
-      { title: '선크림 발라야 할까요?', icon: '🌞', color: '#FFC42E' },
-      { title: '아무렇게나 해줘', icon: '🛏️', color: '#61C3A0' },
+      { id: '1', title: '비가 오는지 궁금해요', icon: '☔', color: '#609FFF' },
+      {
+        id: '2',
+        title: '달릴만한 날씨인지 궁금해요',
+        icon: '🏃',
+        color: '#FF7A7A',
+      },
+      { id: '3', title: '미세먼지가 궁금해요', icon: '😷', color: '#B470EA' },
+      { id: '4', title: '선크림 발라야 할까요?', icon: '🌞', color: '#FFC42E' },
+      { id: '5', title: '아무렇게나 해줘', icon: '🛏️', color: '#61C3A0' },
     ],
     selfCustom: [
       { title: '저는 제가 커스텀할래요', icon: '🌈', color: '#929292' },
@@ -35,6 +40,7 @@ const Start = () => {
         <BoxWrapper>
           {presetData.presets.map((presetData) => (
             <StartSelectBox
+              key={presetData.id}
               title={presetData.title}
               icon={presetData.icon}
               color={presetData.color}
