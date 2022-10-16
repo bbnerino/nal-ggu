@@ -5,8 +5,8 @@ import ModalFrame from "../../component/common/ModalFrame";
 import Category from "../../component/setup/Category";
 import Header from "../../component/setup/Header";
 import Select from "../../component/setup/Select";
-import Selected from "../../component/setup/Selected";
 import { dataState } from "../../store/state/example";
+import SelectedCard from "../../component/setup/SelectedCard";
 
 const Setup = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -30,7 +30,7 @@ const Setup = () => {
     <div>
       <Header />
       <Select />
-      {/* <Selected /> */}
+      {/* <SelectedCard /> */}
       <Category />
       <button
         onClick={() => {
@@ -39,7 +39,7 @@ const Setup = () => {
       >
         test modal
       </button>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <ModalFrame>
           <ColorModal
             onhandleModal={() => {
@@ -47,7 +47,7 @@ const Setup = () => {
             }}
           />
         </ModalFrame>
-      )}
+      )} */}
     </div>
   );
 };

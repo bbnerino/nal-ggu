@@ -24,7 +24,7 @@ export const objectState = atom<myObject>({
   effects_UNSTABLE: [persistAtom],
 });
 
-interface InfoData {
+export interface InfoData {
   sort: string;
   category: string;
   title: string;
