@@ -83,7 +83,7 @@ const Start = () => {
     ],
     [
       {
-        sort: '비',
+        sort: '대기',
         category: 'REH',
         title: '습도',
         size: '2',
@@ -94,6 +94,50 @@ const Start = () => {
         category: 'POP',
         title: '강수확률',
         size: '2',
+        color: '#64B2E3',
+      },
+    ],
+    [
+      {
+        sort: '대기',
+        category: 'SKY',
+        title: '하늘상태',
+        size: '2',
+        color: '#64B2E3',
+      },
+      {
+        sort: '대기',
+        category: 'TMP',
+        title: '1시간 기온',
+        size: '2',
+        color: '#64B2E3',
+      },
+      {
+        sort: '비',
+        category: 'PCP',
+        title: '1시간 강수량',
+        size: '1',
+        color: '#64B2E3',
+      },
+      {
+        sort: '비',
+        category: 'REH',
+        title: '습도',
+        size: '1',
+        color: '#64B2E3',
+      },
+      {
+        sort: '바람',
+        category: 'WSD',
+        title: '풍속',
+        size: '1',
+        color: '#64B2E3',
+      },
+      {
+        sort: '바람',
+        category: 'VEC',
+        title: '풍향',
+        size: '1',
         color: '#64B2E3',
       },
     ],
@@ -121,6 +165,7 @@ const Start = () => {
         <BoxWrapper>
           {presetData.presets.map((presetData) => (
             <div
+              style={{ width: '100%' }}
               onClick={() => {
                 setStoreInitialData(presetData.id);
               }}
@@ -158,6 +203,9 @@ const Wrapper = styled.div`
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
+  @media screen and (max-width: 32rem) {
+    font-size: 0.5rem;
+  }
 `;
 
 const HelloWrapper = styled.div`
@@ -173,15 +221,24 @@ const Hello = styled.div`
   span {
     color: #6d39ff;
   }
+  @media screen and (max-width: 32rem) {
+    font-size: 1rem;
+  }
 `;
 
 const AppTitle = styled.span`
   font-size: 2rem;
   font-weight: bold;
+  @media screen and (max-width: 32rem) {
+    font-size: 1rem;
+  }
 `;
 const Logo = styled.img`
   width: 5rem;
   margin-right: 0.5rem;
+  @media screen and (max-width: 32rem) {
+    width: 3rem;
+  }
 `;
 
 const Divider = styled.div`
