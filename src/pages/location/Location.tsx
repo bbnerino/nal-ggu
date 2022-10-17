@@ -1,13 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { atom, useRecoilState } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import ModalFrame from '../../component/common/ModalFrame';
 import useMap from '../../hooks/useMap';
 import { xyConvert } from '../../lib/convertCoordinate';
+import { locationState } from '../main/Main';
 
-const { persistAtom } = recoilPersist()
 interface HandleSubmitEvent {
   (e: React.SyntheticEvent<HTMLFormElement>): void
 }
@@ -34,26 +33,20 @@ const ResultComponent = ({ address, handleListClick }: Props) => {
   return (
     <section className='result_container' onClick={handleListClick}>
       {resultArray.map((result, idx) => {
-        return <div  key={idx} data-x={result.x} data-y={result.y}>{result.roadAddress}</div>
+        return <div key={idx} data-x={result.x} data-y={result.y}>{result.roadAddress}</div>
       })}
     </section>
   )
 }
 
-const state = atom({
-  key: 'selectedInformation',
-  default: [''],
-  effects_UNSTABLE: [persistAtom],
-});
-
-interface IProps{
+interface IProps {
   setPopLocationModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Location = ({setPopLocationModal}:IProps) => {
+const Location = ({ setPopLocationModal }: IProps) => {
   const [inputAddress, setInputAddress] = useState('');
   const [selectedAddress, setSelectedAddress] = useState(['']);
-  const [, setSelectedFinalAddress] = useRecoilState(state)
+  const [, setSelectedFinalAddress] = useRecoilState(locationState)
   const inputValueRef = useRef<HTMLInputElement>(null);
 
   const handleInputSubmit: HandleSubmitEvent = e => {
@@ -80,35 +73,36 @@ const Location = ({setPopLocationModal}:IProps) => {
   return (
     <ModalFrame>
       <Wrapper>
-      <button onClick={()=>{setPopLocationModal(false)}} className='close'>
-        X
-      </button>
-      <form onSubmit={handleInputSubmit}>
-        <section >
-          <input
-            ref={inputValueRef}
-            name="findAddress"
-            placeholder='주소를 입력해주세요'
-          ></input>
-          <button className='search_btn'>검색</button>
-        </section>
-        {inputAddress.length !== 0 && <ResultComponent address={inputAddress} handleListClick={handleListClick} />}
-        <section >
-          <div className='selected'>{selectedAddress?.[0]}</div>
-          <div>
-            <Link to="/main">
-              <div className='button_container'>
-                <button  className='cancle_button' onClick={()=>{setPopLocationModal(false)}}>취소</button>
-                <button className='save_button' onClick={handleButtonConfirm}>저장</button>
-              </div>
-            </Link>
-          </div>
-        </section>
-      </form>
+        <button onClick={() => { setPopLocationModal(false) }} className='close'>
+          X
+        </button>
+        <form onSubmit={handleInputSubmit}>
+          <section >
+            <input
+              ref={inputValueRef}
+              name="findAddress"
+              placeholder='주소를 입력해주세요'
+            ></input>
+            <button className='search_btn'>검색</button>
+          </section>
+          {inputAddress.length !== 0 && <ResultComponent address={inputAddress} handleListClick={handleListClick} />}
+          <section >
+            <div className='selected'>{selectedAddress?.[0]}</div>
+            <div>
+              <Link to="/main">
+                <div className='button_container'>
+                  <button className='cancel_button' onClick={() => { setPopLocationModal(false) }}>취소</button>
+                  <button className='save_button' onClick={handleButtonConfirm}>저장</button>
+                </div>
+              </Link>
+            </div>
+          </section>
+        </form>
       </Wrapper>
     </ModalFrame>
   )
 }
+
 const Wrapper = styled.div`
   width: 80%;
   margin: auto;
@@ -158,7 +152,7 @@ const Wrapper = styled.div`
       border-radius: 5px;
       border: 0.2px solid '#b5b4b43';
       color: white;
-      &.cancle_button{
+      &.cancel_button{
         color: #333;
       }
       &.save_button{

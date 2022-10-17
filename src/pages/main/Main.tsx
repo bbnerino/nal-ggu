@@ -1,56 +1,39 @@
 import React, { useEffect, useState } from "react";
+import { atom, useRecoilState } from "recoil";
+import { recoilPersist } from "recoil-persist";
 import styled from "styled-components";
 import MainHeader from "../../component/main/Header";
 import WeatherBox from "../../component/main/WeatherBox";
+import { getInformation } from "../../lib/api";
 import { UserWeather, Weather } from "../../type";
+import { StartData, startState } from "../../store/state/startData";
+
+const { persistAtom } = recoilPersist();
+
+export const locationState = atom({
+  key: "selectedInformation",
+  default: ["경기도 성남시 분당구 판교동", "62", "123"],
+  effects_UNSTABLE: [persistAtom],
+});
 
 const Main = () => {
-  const location = { name: "서울시 동작구 노량진로 74", x: 4, y: 4 };
+  const [startData, setStartData] = useRecoilState(startState);
+  const [selectedFinalAddress, setSelectedFinalAddress] =
+    useRecoilState(locationState);
+  console.log(selectedFinalAddress);
+  const [name, x, y] = selectedFinalAddress;
+  const location = { name, x, y };
   const random = () => {
     return Math.round(Math.random()) + 1;
   };
+
   const [weather, setWeather] = useState<any>({});
 
-  const [userSelectWeather, setUserSelectWeather] = useState<UserWeather[]>([
-    {
-      sort: "비",
-      category: "PCP",
-      title: "강수량",
-      size: random(),
-      color: "#64B2E3",
-    },
-    {
-      sort: "해",
-      category: "TMP",
-      title: "온도",
-      size: random(),
-      color: "#ECC331",
-    },
-    {
-      sort: "비",
-      category: "POP",
-      title: "강수확률",
-      size: random(),
-      color: "#56DFA3",
-    },
-    {
-      sort: "비",
-      category: "REH",
-      title: "습도",
-      size: random(),
-      color: "#FFA57A",
-    },
-    {
-      sort: "해",
-      category: "SKY",
-      title: "하늘상태",
-      size: random(),
-      color: "#ECC331",
-    },
-  ]);
+  const [userSelectWeather, setUserSelectWeather] =
+    useState<StartData[]>(startData);
 
   useEffect(() => {
-    const weatherData: Weather[] = [
+    let weatherData: Weather[] = [
       {
         baseDate: "20221016",
         baseTime: "1400",
@@ -172,13 +155,28 @@ const Main = () => {
         ny: 127,
       },
     ];
+
     let weatherArray = {};
 
-    weatherData.map((data) => {
-      weatherArray = Object.assign(weatherArray, { [data.category]: data });
-    });
-    setWeather(weatherArray);
-  }, []);
+    async function test() {
+      try {
+        const { item } = await getInformation(x, y);
+        console.log(item);
+        item.forEach((data: Weather) => {
+          weatherArray = Object.assign(weatherArray, { [data.category]: data });
+        });
+      } catch (error) {
+        console.log(error);
+        weatherData.forEach((data) => {
+          weatherArray = Object.assign(weatherArray, { [data.category]: data });
+        });
+      } finally {
+        console.log(weatherArray);
+        setWeather(weatherArray);
+      }
+    }
+    test();
+  }, [x, y]);
 
   return (
     <Wrapper className="wr">
