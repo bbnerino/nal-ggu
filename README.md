@@ -7,6 +7,9 @@
 
 ![nalggu](https://i.imgur.com/fzYxAlg.png)
 
+## 팀원 소개
+[루이](https://github.com/bbnerino), [브이](https://github.com/Subeen2), [제이든](https://github.com/JaydenLee1116), [알파카](https://github.com/SloSte34), [가너](https://github.com/ganeodolu), [힝](https://github.com/hmyo2853), [자만](https://github.com/ejaman), [헤이든](https://github.com/Sorin0404
+
 ## 프로젝트 소개
 ```
 이제 날씨도 DIY 해보세요!
