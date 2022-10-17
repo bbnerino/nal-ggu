@@ -116,6 +116,7 @@ interface IweatherBox {
 }
 
 const Wrapper = styled.div<IweatherBox>`
+  box-shadow: 2px 2px 2px 2px rgb(223, 222, 223);
   display: flex;
   padding: 1rem;
   background-color: ${(props) => props.color};
@@ -123,22 +124,25 @@ const Wrapper = styled.div<IweatherBox>`
   width: ${(props) => props.size};
   margin: 2.5rem 5%;
   border-radius: 10px;
+  font-weight: 600;
   ${(props) =>
     props.size === "40%" &&
     css`
       .weatherDataWrapper {
-        margin: auto auto 1rem auto;
+        margin: auto auto 2rem auto;
+        line-height: 3rem;
         text-align: center;
         .weatherTitle {
-          font-size: 1rem;
+          font-size: 1.5rem;
+          font-weight: 400;
         }
         .weatherData {
-          font-size: 2rem;
+          font-size: 3rem;
         }
       }
       img {
-        width: 5rem;
-        height: 5rem;
+        width: 8rem;
+        height: 8rem;
       }
     `}
 
@@ -148,17 +152,19 @@ const Wrapper = styled.div<IweatherBox>`
       justify-content: space-around;
       align-items: center;
       .weatherDataWrapper {
+        line-height: 3rem;
         text-align: center;
         .weatherTitle {
           font-size: 1.5rem;
+          font-weight: 400;
         }
         .weatherData {
-          font-size: 3rem;
+          font-size: 3.5rem;
         }
       }
       img {
-        width: 8rem;
-        height: 8rem;
+        width: 10rem;
+        height: 10rem;
       }
     `}
 
@@ -171,6 +177,44 @@ const Wrapper = styled.div<IweatherBox>`
   @media screen and (max-width: 32rem) {
     height: 10rem;
     font-size: 1rem;
+
+    ${(props) =>
+      props.size === "40%" &&
+      css`
+        .weatherDataWrapper {
+          line-height: 2rem;
+          .weatherTitle {
+            font-size: 1rem;
+            font-weight: 400;
+          }
+          .weatherData {
+            font-size: 2rem;
+          }
+        }
+        img {
+          width: 5rem;
+          height: 5rem;
+        }
+      `}
+
+    ${(props) =>
+      props.size === "90%" &&
+      css`
+        .weatherDataWrapper {
+          line-height: 2.5rem;
+          .weatherTitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+          }
+          .weatherData {
+            font-size: 3rem;
+          }
+        }
+        img {
+          width: 7rem;
+          height: 7rem;
+        }
+      `}
   }
 `;
 
