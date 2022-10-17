@@ -32,18 +32,21 @@ const Map = ({ address }: Props) => {
 
   useEffect(() => {
     const initMap = () => {
-      naver.maps.Service.geocode({
-        query : address 
-      }, (status: any, response: any) => {
-        if (status !== naver.maps.Service.Status.OK) {
-          return alert('Something wrong!');
+      naver.maps.Service.geocode(
+        {
+          query: address,
+        },
+        (status: any, response: any) => {
+          if (status !== naver.maps.Service.Status.OK) {
+            return alert("Something wrong!");
+          }
+          console.log(response.v2.addresses);
+          setResult(response.v2.addresses);
         }
-        console.log(response.v2.addresses);
-        setResult(response.v2.addresses)
-      });
-    }
+      );
+    };
     initMap();
-  }, [address])
+  }, [address]);
 
   return result;
 };
