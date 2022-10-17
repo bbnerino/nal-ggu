@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { atom, useRecoilState } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 import styled from "styled-components";
 import MainHeader from "../../component/main/Header";
 import WeatherBox from "../../component/main/WeatherBox";
+import { getInformation } from "../../lib/api";
 import { UserWeather, Weather } from "../../type";
 
+const { persistAtom } = recoilPersist()
+
+export const locationState = atom({
+  key: 'selectedInformation',
+  default: ['경기도 성남시 분당구 판교동', '62', '123'],
+  effects_UNSTABLE: [persistAtom],
+});
+
 const Main = () => {
-  const location = { name: "서울시 동작구 노량진로 74", x: 4, y: 4 };
+  const [selectedFinalAddress, setSelectedFinalAddress] = useRecoilState(locationState);
+  console.log(selectedFinalAddress);
+  const [name, x, y] = selectedFinalAddress;
+  const location = { name, x, y };
   const random = () => {
     return Math.round(Math.random()) + 1;
   };
@@ -50,7 +64,7 @@ const Main = () => {
   ]);
 
   useEffect(() => {
-    const weatherData: Weather[] = [
+    let weatherData: Weather[] = [
       {
         baseDate: "20221016",
         baseTime: "1400",
@@ -172,13 +186,29 @@ const Main = () => {
         ny: 127,
       },
     ];
+    
     let weatherArray = {};
 
-    weatherData.map((data) => {
-      weatherArray = Object.assign(weatherArray, { [data.category]: data });
-    });
-    setWeather(weatherArray);
-  }, []);
+    async function test() {
+      try {
+        const {item}  = await getInformation(x, y);
+        console.log(item);
+        item.forEach((data: Weather) => {
+          weatherArray = Object.assign(weatherArray, { [data.category]: data });
+        });
+      } catch (error) {
+        console.log(error)
+        weatherData.forEach((data) => {
+          weatherArray = Object.assign(weatherArray, { [data.category]: data });
+        });
+      } finally {
+        console.log(weatherArray);
+        setWeather(weatherArray);
+      }
+    }
+    test()
+
+  }, [x, y]);
 
   return (
     <Wrapper className="wr">
