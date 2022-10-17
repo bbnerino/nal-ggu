@@ -22,7 +22,7 @@ export const getInformation = async (x: string, y: string) => {
   const [base_date, base_time] = timeTransform();
   const response = await api({
     params: {
-      serviceKey: process.env.REACT_APP_WEATHER_API_KEY,
+      serviceKey: "D2MocWkiexYG26roL3iWAgrpSwa3imd91kvZTP/AE1VHetV1nLwa3yJ65hk3DNcQugudA5lVQozFi25WKxoOGw==",
       numOfRows: '12',
       pageNo: '1',
       base_date,
