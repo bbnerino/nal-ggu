@@ -55,11 +55,9 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
       switch (CATEGORY) {
         case "SKY":
           setWeatherData(skyTransform(weather[CATEGORY].fcstValue));
-          setWeatherImg("/assets/icon/rainy.png");
           return;
         case "PTY":
           setWeatherData(rainTransform(weather[CATEGORY].fcstValue));
-          setWeatherImg("/assets/icon/rainy.png");
           return;
         case "TMP":
           setWeatherData(weather[CATEGORY].fcstValue);
