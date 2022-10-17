@@ -1,42 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { dataState, InfoData, testState } from "../../store/state/example";
+import { InfoData } from "../../store/state/example";
 import SelectedCard from "./SelectedCard";
 
-import { Droppable, Draggable } from "react-beautiful-dnd";
+// import { Droppable, Draggable } from "react-beautiful-dnd";
 
-const Select = ({ cards }: any) => {
-  const [info, setInfo] = useRecoilState(dataState);
-  const [test, setTest] = useRecoilState(testState);
-
+const Select = ({ cards }: { cards: InfoData[] }) => {
   return (
     <Container>
-      <Title>날꾸를 마음대로 꾸며주세요!</Title>
-      {/* 드롭이 일어날 영역을 래핑 */}
-      <Droppable droppableId="cardlists">
+      {/* <Title>{prefix}</Title>
+      <Droppable droppableId={`${prefix}`}>
         {(provided) => (
-          <div
-            className="cardlists"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {cards.map((e: any, i: number) => (
-              <SelectedCard key={i} data={e} index={i} />
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            {elements.map((item: any, index: number) => (
+              <SelectedCard key={item.id} item={item} index={index} />
             ))}
             {provided.placeholder}
           </div>
         )}
-      </Droppable>
+      </Droppable> */}
+
+      <Title>날꾸를 마음대로 꾸며주세요!</Title>
+
+      {cards.map((e: any, i: number) => (
+        <SelectedCard key={i} data={e} index={i} />
+      ))}
     </Container>
   );
 };
 
-export default Select;
-
 const Container = styled.div`
-  background-color: #ff9d9d;
+  padding-top: 80px;
 `;
 
 const Title = styled.p`
@@ -46,12 +41,4 @@ const Title = styled.p`
   font-weight: 600;
 `;
 
-const SelectContainer = styled.div`
-  background-color: green;
-  padding: 2rem;
-`;
-
-const Check = styled.div`
-  width: 100%;
-  background-color: red;
-`;
+export default Select;
