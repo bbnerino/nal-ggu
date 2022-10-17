@@ -11,6 +11,7 @@ const SetHeader = () => {
     <Wrapper>
       <div className="header">
         <img
+          alt="arrow_left"
           className="arrow_left"
           src="/assets/arrow-left.png"
           onClick={() => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useRecoilState } from "recoil";
 import { dataState } from "../../store/state/example";
@@ -7,16 +7,6 @@ import styled from "styled-components";
 
 const Category = () => {
   const [info, setInfo] = useRecoilState(dataState);
-
-  const getData = async () => {
-    const response = await fetch("/data.json", { method: "GET" });
-    const data = await response.json();
-    setInfo(data.data);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const infoSort = (name: string) => {
     let newArr = [];
@@ -28,12 +18,16 @@ const Category = () => {
     return newArr;
   };
 
+  const alertProblems = () => {
+    alert("아직 서비스 준비중입니다! 더 나은 날꾸를 기다려주세요!");
+  };
+
   return (
     <CategoryContainer>
       <WeatherCategory>
         <WeatherCategoryTitle>🌤 대기</WeatherCategoryTitle>
         {infoSort("대기").map((data) => (
-          <WeatherCategoryButton key={data.category}>
+          <WeatherCategoryButton key={data.category} onClick={alertProblems}>
             <span>{data.title}</span>
             <DotsImage src="/assets/dots.png" alt="dots" />
           </WeatherCategoryButton>
@@ -42,7 +36,7 @@ const Category = () => {
       <WeatherCategory>
         <WeatherCategoryTitle>☔️ 강수</WeatherCategoryTitle>
         {infoSort("강수").map((data) => (
-          <WeatherCategoryButton key={data.category}>
+          <WeatherCategoryButton key={data.category} onClick={alertProblems}>
             <span>{data.title}</span>
             <DotsImage src="/assets/dots.png" alt="dots" />
           </WeatherCategoryButton>
@@ -86,6 +80,7 @@ const WeatherCategoryButton = styled.div`
   width: 100%;
   height: 2rem;
   margin: 0.3rem 0;
+  cursor: pointer;
   &:hover {
     background-color: #e7e7e7;
   }
@@ -94,7 +89,6 @@ const WeatherCategoryButton = styled.div`
 const DotsImage = styled.img`
   width: 1rem;
   right: 0.5rem;
-  cursor: pointer;
 `;
 
 export default Category;

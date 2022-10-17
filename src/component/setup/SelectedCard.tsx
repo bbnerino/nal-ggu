@@ -1,12 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled, { css } from "styled-components";
-import { InfoData } from "../../store/state/example";
+import React, { useState } from "react";
+import styled from "styled-components";
+
 import ColorModal from "../common/ColorModal";
 import ModalFrame from "../common/ModalFrame";
-import { Draggable } from "react-beautiful-dnd";
+
+interface ItemType {
+  id: string;
+  prefix: string;
+  content: string;
+  sort: string;
+  title: string;
+  size: string;
+  color: string;
+  category: string;
+}
 
 interface Data {
-  data: InfoData;
+  data: ItemType;
   index: number;
 }
 const SelectedCard = ({ data, index }: Data) => {
@@ -19,72 +29,61 @@ const SelectedCard = ({ data, index }: Data) => {
   const oncloseModal = () => {
     setIsModalOpen(false);
   };
+
   const onSetColor = (colorData: string) => {
     setSaveColor(colorData);
   };
+
   const alertNotice = () => {
     alert("아직 서비스 준비중입니다! 더 나은 날꾸를 기다려주세요!");
   };
+
   return (
-    <Draggable
-      draggableId={`test-${data.category}`}
-      index={index}
-      key={`test-${data.category}`}
-    >
-      {(provided) => {
-        return (
-          <div
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-          >
-            <WeatherCategoryButton>
-              <span>{data.title}</span>
-              <Wrappper>
-                <Item>
-                  <label htmlFor={`1${data.title}`}>
-                    <RadioButton
-                      id={`1${data.title}`}
-                      type="radio"
-                      name={data.title}
-                    />
-                    <LabelText id="1">1x1</LabelText>
-                  </label>
-                </Item>
-                <Item>
-                  <label htmlFor={`2${data.title}`}>
-                    <RadioButton
-                      id={`2${data.title}`}
-                      type="radio"
-                      name={data.title}
-                    />
-                    <LabelText id="2">2x1</LabelText>
-                  </label>
-                </Item>
-                <SelectColor
-                  color={saveColor}
-                  onClick={() => {
-                    setIsModalOpen(true);
-                  }}
-                ></SelectColor>
-                <DotsImage src="/assets/dots.png" alt="dots" />
-              </Wrappper>
-            </WeatherCategoryButton>
-            {isModalOpen ? (
-              <ModalFrame>
-                <ColorModal
-                  setSave={onSetColor}
-                  saveColor={saveColor}
-                  onhandleModal={() => {
-                    oncloseModal();
-                  }}
-                />
-              </ModalFrame>
-            ) : null}
-          </div>
-        );
-      }}
-    </Draggable>
+    <>
+      <WeatherCategoryButton>
+        <span>{data.title}</span>
+        <Wrappper>
+          <Item>
+            <label htmlFor={`1${data.title}`}>
+              <RadioButton
+                id={`1${data.title}`}
+                type="radio"
+                name={data.title}
+              />
+              <LabelText id="1">1x1</LabelText>
+            </label>
+          </Item>
+          <Item>
+            <label htmlFor={`2${data.title}`}>
+              <RadioButton
+                id={`2${data.title}`}
+                type="radio"
+                name={data.title}
+              />
+              <LabelText id="2">2x1</LabelText>
+            </label>
+          </Item>
+          <SelectColor
+            color={saveColor}
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
+          ></SelectColor>
+          <DotsImage src="/assets/dots.png" alt="dots" onClick={alertNotice} />
+        </Wrappper>
+      </WeatherCategoryButton>
+      {isModalOpen ? (
+        <ModalFrame>
+          <ColorModal
+            setSave={onSetColor}
+            saveColor={saveColor}
+            onhandleModal={() => {
+              oncloseModal();
+            }}
+          />
+        </ModalFrame>
+      ) : null}
+    </>
   );
 };
 
@@ -100,6 +99,7 @@ const WeatherCategoryButton = styled.div`
   height: 2rem;
   margin: 0.3rem 0;
   padding: 2rem 1rem;
+
   &:hover {
     background-color: #e7e7e7;
   }
@@ -113,6 +113,7 @@ const Wrappper = styled.div`
 const DotsImage = styled.img`
   width: 1rem;
   right: 0.5rem;
+  cursor: pointer;
 `;
 
 const SelectColor = styled.div.attrs((props) => ({
@@ -122,14 +123,15 @@ const SelectColor = styled.div.attrs((props) => ({
   border-radius: 50%;
   width: 1.5rem;
   height: 1.5rem;
-  cursor: pointer;
   margin-right: 0.5rem;
+  cursor: pointer;
 `;
 
 const Item = styled.div`
   ${(props) => props.theme.flex.flexBox()};
   flex-direction: row;
 `;
+
 const RadioButton = styled.input.attrs({ type: "radio" })`
   opacity: 0;
   display: none;
@@ -140,6 +142,7 @@ const LabelText = styled.span`
   border-radius: 0.4rem;
   padding: 0.3rem 1rem;
   margin-right: 1rem;
+  cursor: pointer;
   ${RadioButton}:checked + && {
     background-color: #6d3dff;
     color: white;
