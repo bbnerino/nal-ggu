@@ -60,7 +60,7 @@ const Location = ({ setPopLocationModal }: IProps) => {
 
   const handleListClick: HandleClickEvent = (e) => {
     const target = e.target as HTMLFormElement;
-    console.log(target);
+    if(target.className === 'result_container') return
     const convertedGrid = xyConvert(Number(target.dataset.y), Number(target.dataset.x));
     setSelectedAddress([String(target.textContent), String(convertedGrid.x), String(convertedGrid.y)])
   }
