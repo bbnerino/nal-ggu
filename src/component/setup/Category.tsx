@@ -19,7 +19,7 @@ const Category = () => {
   };
 
   const alertProblems = () => {
-    alert("해당 기능은 아직 준비중인 서비스입니다.");
+    alert("아직 서비스 준비중입니다! 더 나은 날꾸를 기다려주세요!");
   };
 
   return (
@@ -45,7 +45,7 @@ const Category = () => {
       <WeatherCategory>
         <WeatherCategoryTitle>💨 바람</WeatherCategoryTitle>
         {infoSort("바람").map((data) => (
-          <WeatherCategoryButton key={data.category} onClick={alertProblems}>
+          <WeatherCategoryButton key={data.category}>
             <span>{data.title}</span>
             <DotsImage src="/assets/dots.png" alt="dots" />
           </WeatherCategoryButton>
@@ -55,7 +55,9 @@ const Category = () => {
   );
 };
 
-const CategoryContainer = styled.div``;
+const CategoryContainer = styled.div`
+  padding-bottom: 4rem;
+`;
 
 const WeatherCategory = styled.div`
   margin: 0.3rem 0 1rem 0;
@@ -67,18 +69,25 @@ const WeatherCategoryTitle = styled.p`
   margin: 0 0 0.5rem 0;
 `;
 
-const WeatherCategoryButton = styled.button`
+const WeatherCategoryButton = styled.div`
   ${(props) => props.theme.flex.flexBox()};
-  position: relative;
+  background-color: ${(props) => props.theme.colors.lightGray};
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.6rem;
+  border: 1px solid #cdcdcd;
+  padding: 2rem 1rem;
   width: 100%;
   height: 2rem;
   margin: 0.3rem 0;
   cursor: pointer;
+  &:hover {
+    background-color: #e7e7e7;
+  }
 `;
 
 const DotsImage = styled.img`
   width: 1rem;
-  position: absolute;
   right: 0.5rem;
 `;
 

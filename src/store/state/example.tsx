@@ -49,14 +49,14 @@ export const testState = atom<InfoData[]>({
     },
     {
       category: "PTY",
-      color: "#64B2E3",
-      size: "2",
+      color: "#FFA57A",
+      size: "1",
       sort: "강수",
       title: "강수형태",
     },
     {
       category: "PCP",
-      color: "#64B2E3",
+      color: "#56DFA3",
       size: "2",
       sort: "강수",
       title: "1시간 강수량",

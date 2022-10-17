@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface SideBarType {
@@ -7,14 +8,22 @@ interface SideBarType {
 }
 
 const SideBar = ({ isOpenSideBar, hideSideBar }: SideBarType) => {
+  const navigate = useNavigate();
   return (
     <>
       <SideBarContainer isOpenSideBar={isOpenSideBar}>
         <SideBarNav isOpenSideBar={isOpenSideBar}>
-          <div className="logo-container">
+          <div className="logoContainer">
             <img className="logo" src="/assets/sun.png" />
           </div>
-          <button className="custom-btn">커스텀 설정</button>
+          <button
+            onClick={() => {
+              navigate("/setup");
+            }}
+            className="customBtn"
+          >
+            🛎 커스텀 설정
+          </button>
         </SideBarNav>
         <SideBarBlank isOpenSideBar={isOpenSideBar} onClick={hideSideBar} />
       </SideBarContainer>
@@ -38,7 +47,8 @@ const SideBarContainer = styled.div`
 `;
 
 const SideBarNav = styled.div`
-  background-color: pink;
+  background: linear-gradient(to top, white, #9292921c);
+  background-color: #edebed;
   width: calc(100% * 0.6);
   animation: 0.7s
     ${(props: SideBarType) => (props.isOpenSideBar ? "showUp" : "showOut")}
@@ -64,33 +74,34 @@ const SideBarNav = styled.div`
     }
   }
 
-  .logo-container {
+  .logoContainer {
     width: 100%;
-    height: calc(100% * 0.4);
+    height: calc(100% * 0.3);
     display: flex;
     justify-content: center;
+    background-color: #ffdbfa;
 
     .logo {
-      height: 150px;
+      height: calc(100% * 0.5);
       display: block;
       margin: auto;
     }
   }
 
-  .custom-btn {
+  .customBtn {
     appearance: none;
     cursor: pointer;
-    width: 100px;
     height: 40px;
-    border: 1px solid aqua;
-    border-radius: 10px;
+    border: none;
     font-size: 15px;
+    margin-top: 50px;
+    background-color: transparent;
   }
 `;
 
 const SideBarBlank = styled.div`
   width: calc(100% - 100% * 0.6);
-  background-color: black;
+  background: linear-gradient(to left, #4f4e4f, black);
   animation: 0.3s
     ${(props: SideBarType) => (props.isOpenSideBar ? "fadein" : "fadeout")}
     forwards;

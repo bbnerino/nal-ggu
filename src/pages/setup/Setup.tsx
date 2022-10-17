@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import Category from "../../component/setup/Category";
 import Header from "../../component/setup/Header";
 import Select from "../../component/setup/Select";
-import { dataState, InfoData, testState } from "../../store/state/example";
+import { dataState, testState } from "../../store/state/example";
 
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+// import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 import styled from "styled-components";
-import SelectedCard from "../../component/setup/SelectedCard";
 
 const Setup = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [info, setInfo] = useRecoilState(dataState);
 
   const getData = async () => {
@@ -24,12 +22,8 @@ const Setup = () => {
     getData();
   }, []);
 
-  const oncloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   // test 용
-  // const [cards, setCards] = useRecoilState(testState);
+  const [cards, setCards] = useRecoilState(testState);
 
   // 드래그가 끝났을 때의 동작을 지정해주는 함수 --> test용이라 수정하셔도 됩니다!!!
   // const onDragEnd = (result: DropResult) => {
@@ -41,114 +35,102 @@ const Setup = () => {
   // };
 
   // fake data generator
-  const getItems = (count: number, prefix: string) =>
-    Array.from({ length: count }, (v, k) => k).map((k) => {
-      const randomId = Math.floor(Math.random() * 1000);
-      return {
-        id: `item-${randomId}`,
-        prefix,
-        content: `item ${randomId}`,
-      };
-    });
+  // const getItems = (count: number, prefix: string) =>
+  //   Array.from({ length: count }, (v, k) => k).map((k) => {
+  //     const randomId = Math.floor(Math.random() * 1000);
+  //     return {
+  //       id: `item-${randomId}`,
+  //       prefix,
+  //       content: `item ${randomId}`,
+  //     };
+  //   });
 
-  const removeFromList = (list: string[], index: number) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(index, 1);
-    return [removed, result];
-  };
+  // const removeFromList = (list: string[], index: number) => {
+  //   const result = Array.from(list);
+  //   const [removed] = result.splice(index, 1);
+  //   return [removed, result];
+  // };
 
-  const addToList = (
-    list: string[],
-    index: number,
-    element: string | string[] | any
-  ) => {
-    const result = Array.from(list);
-    result.splice(index, 0, element);
-    return result;
-  };
+  // const addToList = (
+  //   list: string[],
+  //   index: number,
+  //   element: string | string[] | any
+  // ) => {
+  //   const result = Array.from(list);
+  //   result.splice(index, 0, element);
+  //   return result;
+  // };
 
-  const lists: (
-    | "날꾸를 마음대로 꾸며주세요!"
-    | "🌤 대기"
-    | "☔️ 강수"
-    | "💨 바람"
-  )[] = ["날꾸를 마음대로 꾸며주세요!", "🌤 대기", "☔️ 강수", "💨 바람"];
+  // const lists: (
+  //   | "날꾸를 마음대로 꾸며주세요!"
+  //   | "🌤 대기"
+  //   | "☔️ 강수"
+  //   | "💨 바람"
+  // )[] = ["날꾸를 마음대로 꾸며주세요!", "🌤 대기", "☔️ 강수", "💨 바람"];
 
-  const generateLists = () =>
-    lists.reduce(
-      (acc: any, listKey: string) => ({
-        ...acc,
-        [listKey]: getItems(3, listKey),
-      }),
-      {}
-    );
+  // const generateLists = () =>
+  //   lists.reduce(
+  //     (acc: any, listKey: string) => ({
+  //       ...acc,
+  //       [listKey]: getItems(3, listKey),
+  //     }),
+  //     {}
+  //   );
 
-  const [elements, setElements] = useState(generateLists());
+  // const [elements, setElements] = useState(generateLists());
 
-  useEffect(() => {
-    setElements(generateLists());
-  }, []);
+  // useEffect(() => {
+  //   setElements(generateLists());
+  // }, []);
 
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
+  // const onDragEnd = (result: DropResult) => {
+  //   const { source, destination } = result;
 
-    if (!destination) {
-      return;
-    }
+  //   if (!destination) {
+  //     return;
+  //   }
 
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    )
-      return;
+  //   if (
+  //     source.droppableId === destination.droppableId &&
+  //     source.index === destination.index
+  //   )
+  //     return;
 
-    const listCopy = { ...elements };
+  //   const listCopy = { ...elements };
 
-    const sourceList = listCopy[source.droppableId];
+  //   const sourceList = listCopy[source.droppableId];
 
-    const [removedElement, newSourceList] = removeFromList(
-      sourceList,
-      result.source.index
-    );
+  //   const [removedElement, newSourceList] = removeFromList(
+  //     sourceList,
+  //     result.source.index
+  //   );
 
-    listCopy[source.droppableId] = newSourceList;
+  //   listCopy[source.droppableId] = newSourceList;
 
-    const destinationList = listCopy[destination.droppableId];
+  //   const destinationList = listCopy[destination.droppableId];
 
-    listCopy[destination.droppableId] = addToList(
-      destinationList,
-      destination.index,
-      removedElement
-    );
+  //   listCopy[destination.droppableId] = addToList(
+  //     destinationList,
+  //     destination.index,
+  //     removedElement
+  //   );
 
-    setElements(listCopy);
-  };
+  //   setElements(listCopy);
+  // };
 
   return (
     <div>
       <Header />
-      {/* <DragDropContext onDragEnd={onDragEnd}>
-        {lists.map((listKey: string, index: number) => (
-          <Select
-            elements={elements[listKey]}
-            key={listKey}
-            prefix={listKey}
-            cards={info}
-          />
-        ))}
-      </DragDropContext> */}
-
-      <Category />
-
-      <button
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
-      >
-        test modal
-      </button>
+      <Container>
+        <Select cards={cards} />
+        <Category />
+      </Container>
     </div>
   );
 };
 
+const Container = styled.div`
+  min-height: 100vh;
+  margin: 0 2rem;
+`;
 export default Setup;

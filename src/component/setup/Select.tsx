@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { dataState, InfoData, testState } from "../../store/state/example";
+import { InfoData } from "../../store/state/example";
 import SelectedCard from "./SelectedCard";
 
-import { Droppable, Draggable } from "react-beautiful-dnd";
+// import { Droppable, Draggable } from "react-beautiful-dnd";
 
-const Select = ({
-  cards,
-  prefix,
-  elements,
-}: {
-  cards: InfoData[];
-  prefix: string;
-  elements: string[];
-}) => {
-  const [info, setInfo] = useRecoilState(dataState);
-  const [test, setTest] = useRecoilState(testState);
-
+const Select = ({ cards }: { cards: InfoData[] }) => {
   return (
     <Container>
-      <Title>{prefix}</Title>
+      {/* <Title>{prefix}</Title>
       <Droppable droppableId={`${prefix}`}>
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -31,30 +19,19 @@ const Select = ({
             {provided.placeholder}
           </div>
         )}
-      </Droppable>
-
-      {/* <Title>날꾸를 마음대로 꾸며주세요!</Title>
-      드롭이 일어날 영역을 래핑
-      <Droppable droppableId="cardlists">
-        {(provided) => (
-          <div
-            className="cardlists"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {cards.map((e: any, i: number) => (
-              <SelectedCard key={i} data={e} index={i} />
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
       </Droppable> */}
+
+      <Title>날꾸를 마음대로 꾸며주세요!</Title>
+
+      {cards.map((e: any, i: number) => (
+        <SelectedCard key={i} data={e} index={i} />
+      ))}
     </Container>
   );
 };
 
 const Container = styled.div`
-  background-color: #ff9d9d;
+  padding-top: 80px;
 `;
 
 const Title = styled.p`
@@ -62,11 +39,6 @@ const Title = styled.p`
   padding: 0.5rem;
   font-size: 1.5rem;
   font-weight: 600;
-`;
-
-const SelectContainer = styled.div`
-  background-color: green;
-  padding: 2rem;
 `;
 
 export default Select;
