@@ -48,7 +48,7 @@ const Title = styled.span`
   font-size: 1.5rem;
   font-weight: bold;
   @media screen and (max-width: 32rem) {
-    font-size: 0.5rem;
+    font-size: 1rem;
   }
 `;
 
