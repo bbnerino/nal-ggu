@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { UserWeather } from "../../type";
 
 interface Props {
@@ -35,6 +35,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
       case "2":
         return "비/눈";
       case "3":
+        setWeatherImg("/assets/icon/snow.png");
         return "눈";
       case "4":
         setWeatherImg("/assets/icon/rainy.png");
@@ -49,6 +50,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
       switch (CATEGORY) {
         case "SKY":
           setWeatherData(skyTransform(weather[CATEGORY].fcstValue));
+          setWeatherImg("/assets/icon/rainy.png");
           return;
         case "PTY":
           setWeatherData(rainTransform(weather[CATEGORY].fcstValue));
@@ -56,15 +58,17 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
           return;
         case "TMP":
           setWeatherData(weather[CATEGORY].fcstValue + "℃");
+          setWeatherImg("/assets/icon/temp.png");
           return;
         case "PCP":
           if (weather[CATEGORY].fcstValue === "강수없음")
             setWeatherData(weather[CATEGORY].fcstValue);
           else setWeatherData(weather[CATEGORY].fcstValue + "mm");
-          setWeatherImg("/assets/icon/rainy.png");
+          setWeatherImg("/assets/icon/rain_onehour.png");
           return;
         case "SNO":
           setWeatherData(weather[CATEGORY].fcstValue + "cm");
+          setWeatherImg("/assets/icon/snow.png");
           return;
         case "POP":
           setWeatherData(weather[CATEGORY].fcstValue + "%");
@@ -76,6 +80,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
           return;
         case "WAV":
           setWeatherData(weather[CATEGORY].fcstValue + "M");
+          setWeatherImg("/assets/icon/wave.png");
           return;
         case "VEC":
           setWeatherData(weather[CATEGORY].fcstValue + "deg");
@@ -97,8 +102,10 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
       color={userWeather.color}
     >
       <img src={weatherImg} />
-      <div className="weatherTitle">{userWeather.title}</div>
-      <div className="weatherData">{weatherData}</div>
+      <div className="weatherDataWrapper">
+        <div className="weatherTitle">{userWeather.title}</div>
+        <div className="weatherData">{weatherData}</div>
+      </div>
     </Wrapper>
   );
 };
@@ -109,20 +116,57 @@ interface IweatherBox {
 }
 
 const Wrapper = styled.div<IweatherBox>`
+  display: flex;
   padding: 1rem;
   background-color: ${(props) => props.color};
   height: 15rem;
   width: ${(props) => props.size};
   margin: 2.5rem 5%;
   border-radius: 10px;
-  font-size: 2rem;
-  .img {
-  }
+  ${(props) =>
+    props.size === "40%" &&
+    css`
+      .weatherDataWrapper {
+        margin: auto auto 1rem auto;
+        text-align: center;
+        .weatherTitle {
+          font-size: 1rem;
+        }
+        .weatherData {
+          font-size: 2rem;
+        }
+      }
+      img {
+        width: 5rem;
+        height: 5rem;
+      }
+    `}
 
-  h1 {
+  ${(props) =>
+    props.size === "90%" &&
+    css`
+      justify-content: space-around;
+      align-items: center;
+      .weatherDataWrapper {
+        text-align: center;
+        .weatherTitle {
+          font-size: 1.5rem;
+        }
+        .weatherData {
+          font-size: 3rem;
+        }
+      }
+      img {
+        width: 8rem;
+        height: 8rem;
+      }
+    `}
+
+
+  /* h1 {
     font-size: 5rem;
     margin-top: 1.5rem;
-  }
+  } */
   color: white;
   @media screen and (max-width: 32rem) {
     height: 10rem;
