@@ -77,8 +77,13 @@ const Location = ({ setPopLocationModal }: IProps) => {
   return (
     <LocationModalFrame>
       <Wrapper>
-        <button onClick={() => { setPopLocationModal(false) }} className='close'>
-        </button>
+        <img 
+          className='close'
+          src='/assets/close.png'
+          onClick={() => { setPopLocationModal(false) }}
+          alt=''
+        />
+
         <form onSubmit={handleInputSubmit}>
           <section >
             <input
@@ -137,24 +142,6 @@ const Wrapper = styled.div`
     width: 32px;
     height: 32px;
     opacity: 0.8;
-    appearance: none;
-  }
-  .close:hover {
-    opacity: 1;
-  }
-  .close:before, .close:after {
-    position: absolute;
-    left: 15px;
-    content: ' ';
-    height: 33px;
-    width: 2px;
-    background-color: #333;
-  }
-  .close:before {
-    transform: rotate(45deg);
-  }
-  .close:after {
-    transform: rotate(-45deg);
   }
   form{
     margin-top: 2rem;
