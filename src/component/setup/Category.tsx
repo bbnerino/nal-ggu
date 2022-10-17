@@ -61,7 +61,9 @@ const Category = () => {
   );
 };
 
-const CategoryContainer = styled.div``;
+const CategoryContainer = styled.div`
+  padding-bottom: 4rem;
+`;
 
 const WeatherCategory = styled.div`
   margin: 0.3rem 0 1rem 0;
@@ -73,17 +75,24 @@ const WeatherCategoryTitle = styled.p`
   margin: 0 0 0.5rem 0;
 `;
 
-const WeatherCategoryButton = styled.button`
+const WeatherCategoryButton = styled.div`
   ${(props) => props.theme.flex.flexBox()};
-  position: relative;
+  background-color: ${(props) => props.theme.colors.lightGray};
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.6rem;
+  border: 1px solid #cdcdcd;
+  padding: 2rem 1rem;
   width: 100%;
   height: 2rem;
   margin: 0.3rem 0;
+  &:hover {
+    background-color: #e7e7e7;
+  }
 `;
 
 const DotsImage = styled.img`
   width: 1rem;
-  position: absolute;
   right: 0.5rem;
   cursor: pointer;
 `;

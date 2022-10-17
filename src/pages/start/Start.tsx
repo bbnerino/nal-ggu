@@ -24,7 +24,12 @@ const Start = () => {
         icon: '🏃',
         color: '#FF7A7A',
       },
-      { id: '3', title: '미세먼지가 궁금해요', icon: '😷', color: '#B470EA' },
+      {
+        id: '3',
+        title: '바람이 많이 부는지 궁금해요',
+        icon: '💨',
+        color: '#B470EA',
+      },
       { id: '4', title: '선크림 발라야 할까요?', icon: '🌞', color: '#FFC42E' },
       { id: '5', title: '아무렇게나 해줘', icon: '🛏️', color: '#61C3A0' },
     ],
@@ -169,8 +174,9 @@ const Start = () => {
           <Hello>
             안녕하세요. 저는 <span>날꾸</span>에요! <br />
             <br />
-            저에게 궁금한게 무엇인가요?
-            <br /> 선택해주세요!
+            <span className="SubContent">
+              저에게 궁금한게 무엇인가요? 선택해주세요!
+            </span>
           </Hello>
         </HelloWrapper>
         <BoxWrapper>
@@ -212,8 +218,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 7rem;
   padding-right: 7rem;
-  cursor: pointer;
   user-select: none;
+  @media screen and (max-width: 32rem) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 `;
 
 const LogoWrapper = styled.div`
@@ -238,7 +247,15 @@ const Hello = styled.div`
     color: #6d39ff;
   }
   @media screen and (max-width: 32rem) {
-    font-size: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .SubContent {
+    color: black;
+    font-size: 1.5rem;
+    @media screen and (max-width: 32rem) {
+      font-size: 1rem;
+    }
   }
 `;
 

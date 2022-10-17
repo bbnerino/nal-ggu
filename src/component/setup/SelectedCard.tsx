@@ -22,7 +22,9 @@ const SelectedCard = ({ data, index }: Data) => {
   const onSetColor = (colorData: string) => {
     setSaveColor(colorData);
   };
-
+  const alertNotice = () => {
+    alert("아직 서비스 준비중입니다! 더 나은 날꾸를 기다려주세요!");
+  };
   return (
     <Draggable
       draggableId={`test-${data.category}`}
@@ -91,12 +93,16 @@ export default SelectedCard;
 const WeatherCategoryButton = styled.div`
   ${(props) => props.theme.flex.flexBox()};
   background-color: ${(props) => props.theme.colors.lightGray};
-  border-radius: 0.2rem;
-  border: 1px solid black;
+  border-radius: 0.6rem;
+  border: 1px solid #cdcdcd;
   justify-content: space-between;
   width: 100%;
   height: 2rem;
   margin: 0.3rem 0;
+  padding: 2rem 1rem;
+  &:hover {
+    background-color: #e7e7e7;
+  }
 `;
 
 const Wrappper = styled.div`
@@ -117,6 +123,7 @@ const SelectColor = styled.div.attrs((props) => ({
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
+  margin-right: 0.5rem;
 `;
 
 const Item = styled.div`
@@ -125,14 +132,16 @@ const Item = styled.div`
 `;
 const RadioButton = styled.input.attrs({ type: "radio" })`
   opacity: 0;
+  display: none;
 `;
 
 const LabelText = styled.span`
   color: black;
-  border-radius: 0.2rem;
-  padding: 0.1rem;
+  border-radius: 0.4rem;
+  padding: 0.3rem 1rem;
+  margin-right: 1rem;
   ${RadioButton}:checked + && {
-    background-color: purple;
+    background-color: #6d3dff;
     color: white;
   }
 `;
