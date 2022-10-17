@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import ModalFrame from '../../component/common/ModalFrame';
+import LocationModalFrame from '../../component/location/LocationModalFrame';
 import useMap from '../../hooks/useMap';
 import { xyConvert } from '../../lib/convertCoordinate';
 import { locationState } from '../main/Main';
@@ -67,39 +66,44 @@ const Location = ({ setPopLocationModal }: IProps) => {
   }
 
   const handleButtonConfirm: HandleClickEvent = (e) => {
-    setSelectedFinalAddress(selectedAddress)
+    console.log(selectedAddress);
+    if (selectedAddress.length !== 1) {
+      setSelectedFinalAddress(selectedAddress)
+      setPopLocationModal(false)
+    }
+    console.log(selectedAddress);
   }
 
   return (
-    <ModalFrame>
+    <LocationModalFrame>
       <Wrapper>
         <button onClick={() => { setPopLocationModal(false) }} className='close'>
-          X
         </button>
         <form onSubmit={handleInputSubmit}>
           <section >
             <input
+              className='input'
               ref={inputValueRef}
               name="findAddress"
               placeholder='주소를 입력해주세요'
             ></input>
             <button className='search_btn'>검색</button>
           </section>
-          {inputAddress.length !== 0 && <ResultComponent address={inputAddress} handleListClick={handleListClick} />}
+          <section>
+            {inputAddress.length !== 0 && <ResultComponent address={inputAddress} handleListClick={handleListClick} />}
+          </section>
           <section >
             <div className='selected'>{selectedAddress?.[0]}</div>
             <div>
-              <Link to="/main">
-                <div className='button_container'>
-                  <button className='cancel_button' onClick={() => { setPopLocationModal(false) }}>취소</button>
-                  <button className='save_button' onClick={handleButtonConfirm}>저장</button>
-                </div>
-              </Link>
+              <div className='button_container'>
+                <button className='cancel_button' onClick={() => { setPopLocationModal(false) }}>취소</button>
+                <button className='save_button' onClick={handleButtonConfirm}>저장</button>
+              </div>
             </div>
           </section>
         </form>
       </Wrapper>
-    </ModalFrame>
+    </LocationModalFrame>
   )
 }
 
@@ -110,14 +114,47 @@ const Wrapper = styled.div`
     margin: auto;
     width: 90%;
   }
-  .search_btn{
-    border-radius:5px;
-    margin-left: 1rem;
+  .input{
+    height: 2rem;
+    width: 9rem;
+    margin-right: 0.5rem;
   }
-  .close{
-    position: absolute;
-    right: 1rem;
+  .search_btn{
+    /* margin-right: 1rem; */
+    height: 2rem;
+    width: 3rem;
+    font-size:15px;
+    border-radius: 5px;
     border: none;
+    background-color: #6D3DFF;
+    color: white;
+    cursor: pointer;
+  }
+  .close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.8;
+    appearance: none;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
   }
   form{
     margin-top: 2rem;
@@ -150,7 +187,8 @@ const Wrapper = styled.div`
     button{
       width: 4rem;
       border-radius: 5px;
-      border: 0.2px solid '#b5b4b43';
+      /* border: 0.2px solid '#b5b4b43'; */
+      border: none;
       color: white;
       &.cancel_button{
         color: #333;
