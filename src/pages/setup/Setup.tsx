@@ -48,20 +48,18 @@ const Setup = () => {
   return (
     <div>
       <Header />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Select cards={cards} />
-      </DragDropContext>
-      <Category />
-
-      <button
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
-      >
-        test modal
-      </button>
+      <Container>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Select cards={cards} />
+        </DragDropContext>
+        <Category />
+      </Container>
     </div>
   );
 };
 
+const Container = styled.div`
+  min-height: 100vh;
+  margin: 0 2rem;
+`;
 export default Setup;
