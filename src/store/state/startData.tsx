@@ -1,8 +1,8 @@
-import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
+import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 const { persistAtom } = recoilPersist();
 
-interface StartData {
+export interface StartData {
   sort: string;
   category: string;
   title: string;
@@ -11,7 +11,7 @@ interface StartData {
 }
 
 export const startState = atom<StartData[]>({
-  key: 'startState',
+  key: "startState",
   default: [],
   effects_UNSTABLE: [persistAtom],
 });

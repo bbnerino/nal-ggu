@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { UserWeather } from "../../type";
+import { StartData } from "../../store/state/startData";
 
 interface Props {
-  userWeather: UserWeather;
+  userWeather: StartData;
   weather: any;
 }
 
@@ -111,7 +111,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
 
   return (
     <Wrapper
-      size={userWeather.size === 1 ? "40%" : "90%"}
+      size={userWeather.size === "1" ? "40%" : "90%"}
       color={userWeather.color}
     >
       <img src={weatherImg} />
@@ -156,7 +156,7 @@ const Wrapper = styled.div<IweatherBox>`
           font-weight: 400;
         }
         .weatherData {
-          font-size: 4rem;
+          font-size: 3rem;
         }
 
         .weatherUnit {
@@ -183,7 +183,7 @@ const Wrapper = styled.div<IweatherBox>`
           font-weight: 400;
         }
         .weatherData {
-          font-size: 5rem;
+          font-size: 4rem;
           margin-bottom: 2.5rem;
         }
         .weatherUnit {
