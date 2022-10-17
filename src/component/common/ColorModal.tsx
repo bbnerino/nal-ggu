@@ -12,16 +12,26 @@ const color = [
   "#B0ABB7",
 ];
 interface IColorModal {
-  // color: string;
+  setSave: (x: string) => void;
+  saveColor: string;
   onhandleModal: () => void;
 }
-const ColorModal = ({ onhandleModal }: IColorModal) => {
+const ColorModal = ({ setSave, saveColor, onhandleModal }: IColorModal) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
+  // 바뀌는 color를 saveColor로 세팅
+  const [isSaveColor, setSaveColor] = useState<string>(saveColor);
 
+  // 버튼 클릭시 색상 선택되는 handler
   const onhandleColor = (color: string) => {
     setSelectedColor(color);
+    setSaveColor(color); // setSaveColor로 color값 저장
   };
 
+  // 모달 닫으면 선택된 color값 전달
+  const fn = () => {
+    setSave(isSaveColor);
+    onhandleModal();
+  };
   return (
     <Container>
       <Title>색상 선택 모달</Title>
@@ -48,7 +58,7 @@ const ColorModal = ({ onhandleModal }: IColorModal) => {
       </ColorSection>
       <ButtonSection>
         <Button onClick={onhandleModal}>취소</Button>
-        <Button>저장</Button>
+        <Button onClick={fn}>저장</Button>
       </ButtonSection>
     </Container>
   );
