@@ -32,6 +32,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
   const rainTransform = (code: string) => {
     switch (code) {
       case "0":
+        setWeatherImg("/assets/icon/rainy.png");
         return "없음";
       case "1":
         setWeatherImg("/assets/icon/rainy.png");
@@ -97,12 +98,12 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
           return;
         case "VEC":
           setWeatherData(weather[CATEGORY].fcstValue);
-          setWeatherImg("/assets/icon/dust.png");
+          setWeatherImg("/assets/icon/wind2.png");
           setWeatherUnit("deg");
           return;
         case "WSD":
           setWeatherData(weather[CATEGORY].fcstValue);
-          setWeatherImg("/assets/icon/dust.png");
+          setWeatherImg("/assets/icon/wind.png");
           setWeatherUnit("m/s");
           return;
         default:
