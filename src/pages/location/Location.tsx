@@ -172,6 +172,7 @@ const Wrapper = styled.div`
     width: 32px;
     height: 32px;
     opacity: 0.8;
+    cursor: pointer;
   }
   form {
     margin-top: 2rem;
@@ -197,7 +198,6 @@ const Wrapper = styled.div`
     margin-top: 1rem;
     height: 2rem;
     overflow-y: hidden;
-    overflow-x: scroll;
     width: 100%;
     border: 2px solid #bebdbd;
     border-radius: 5px;
@@ -216,7 +216,8 @@ const Wrapper = styled.div`
       /* border: 0.2px solid '#b5b4b43'; */
       border: none;
       color: white;
-      &.cancel_button {
+      cursor: pointer; 
+      &.cancel_button{
         color: #333;
       }
       &.save_button {
