@@ -35,6 +35,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
       case "2":
         return "비/눈";
       case "3":
+        setWeatherImg("/assets/icon/snow.png");
         return "눈";
       case "4":
         setWeatherImg("/assets/icon/rainy.png");
@@ -49,6 +50,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
       switch (CATEGORY) {
         case "SKY":
           setWeatherData(skyTransform(weather[CATEGORY].fcstValue));
+          setWeatherImg("/assets/icon/rainy.png");
           return;
         case "PTY":
           setWeatherData(rainTransform(weather[CATEGORY].fcstValue));
@@ -56,15 +58,17 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
           return;
         case "TMP":
           setWeatherData(weather[CATEGORY].fcstValue + "℃");
+          setWeatherImg("/assets/icon/temp.png");
           return;
         case "PCP":
           if (weather[CATEGORY].fcstValue === "강수없음")
             setWeatherData(weather[CATEGORY].fcstValue);
           else setWeatherData(weather[CATEGORY].fcstValue + "mm");
-          setWeatherImg("/assets/icon/rainy.png");
+          setWeatherImg("/assets/icon/rain_onehour.png");
           return;
         case "SNO":
           setWeatherData(weather[CATEGORY].fcstValue + "cm");
+          setWeatherImg("/assets/icon/snow.png");
           return;
         case "POP":
           setWeatherData(weather[CATEGORY].fcstValue + "%");
@@ -76,6 +80,7 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
           return;
         case "WAV":
           setWeatherData(weather[CATEGORY].fcstValue + "M");
+          setWeatherImg("/assets/icon/wave.png");
           return;
         case "VEC":
           setWeatherData(weather[CATEGORY].fcstValue + "deg");

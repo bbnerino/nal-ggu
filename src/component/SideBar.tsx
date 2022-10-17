@@ -47,6 +47,7 @@ const SideBarContainer = styled.div`
 `;
 
 const SideBarNav = styled.div`
+  background: linear-gradient(to top, white, #9292921c);
   background-color: #edebed;
   width: calc(100% * 0.6);
   animation: 0.7s
@@ -94,7 +95,7 @@ const SideBarNav = styled.div`
     border: none;
     font-size: 15px;
     margin-top: 50px;
-    background-color: #edebed;
+    background-color: transparent;
   }
 `;
 
