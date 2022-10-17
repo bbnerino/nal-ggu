@@ -103,6 +103,7 @@ const SideBarNav = styled.div`
 const SideBarBlank = styled.div`
   width: calc(100% - 100% * 0.6);
   background: linear-gradient(to left, #4f4e4f, black);
+  cursor: pointer;
   animation: 0.3s
     ${(props: SideBarType) => (props.isOpenSideBar ? "fadein" : "fadeout")}
     forwards;
