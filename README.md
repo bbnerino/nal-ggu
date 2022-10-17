@@ -26,7 +26,7 @@
                사이드바를 통해 설정 페이지로 이동할 수 있습니다.
     - /setup : 화면에 보여질 부분은 크기와 컬러를 선택할 수 있도록 만들었습니다.
     
-    - [배포 페이지](https://nal-ggu.herokuapp.com/) 
+    - [배포 페이지](https://nal-ggoo.herokuapp.com/) 
     
 ## 설치, 환경설정 및 실행 방법
 
