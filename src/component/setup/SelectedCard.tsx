@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { InfoData } from "../../store/state/example";
 import ColorModal from "../common/ColorModal";
@@ -10,22 +10,18 @@ interface Data {
   index: number;
 }
 const SelectedCard = ({ data, index }: Data) => {
-  const [getSize, setSize] = useState<string>("");
-  const [getCate, setCate] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [saveColor, setSaveColor] = useState<string>(data.color);
+
+  const getEl = document.getElementById(`${data.size}${data.title}`);
+  getEl?.setAttribute("checked", "true");
+
   const oncloseModal = () => {
     setIsModalOpen(false);
   };
-
-  useEffect(() => {
-    const sizeBox = document.getElementById("2");
-    if (getSize === "1") {
-      // size 1
-    } else {
-      // size 2
-    }
-    setCate("일출");
-  });
+  const onSetColor = (colorData: string) => {
+    setSaveColor(colorData);
+  };
 
   return (
     <Draggable
@@ -41,37 +37,48 @@ const SelectedCard = ({ data, index }: Data) => {
             ref={provided.innerRef}
           >
             <WeatherCategoryButton>
-              <p>{data.title}</p>
+              <span>{data.title}</span>
               <Wrappper>
                 <Item>
-                  <label htmlFor="fstSize">
-                    <RadioButton id="fstSize" type="radio" name="radio" />
+                  <label htmlFor={`1${data.title}`}>
+                    <RadioButton
+                      id={`1${data.title}`}
+                      type="radio"
+                      name={data.title}
+                    />
                     <LabelText id="1">1x1</LabelText>
                   </label>
                 </Item>
                 <Item>
-                  <label htmlFor="sndSize">
-                    <RadioButton id="sndSize" type="radio" name="radio" />
+                  <label htmlFor={`2${data.title}`}>
+                    <RadioButton
+                      id={`2${data.title}`}
+                      type="radio"
+                      name={data.title}
+                    />
                     <LabelText id="2">2x1</LabelText>
                   </label>
                 </Item>
                 <SelectColor
+                  color={saveColor}
                   onClick={() => {
                     setIsModalOpen(true);
                   }}
                 ></SelectColor>
                 <DotsImage src="/assets/dots.png" alt="dots" />
-                {isModalOpen ? (
-                  <ModalFrame>
-                    <ColorModal
-                      onhandleModal={() => {
-                        oncloseModal();
-                      }}
-                    />
-                  </ModalFrame>
-                ) : null}
               </Wrappper>
             </WeatherCategoryButton>
+            {isModalOpen ? (
+              <ModalFrame>
+                <ColorModal
+                  setSave={onSetColor}
+                  saveColor={saveColor}
+                  onhandleModal={() => {
+                    oncloseModal();
+                  }}
+                />
+              </ModalFrame>
+            ) : null}
           </div>
         );
       }}
@@ -82,12 +89,14 @@ const SelectedCard = ({ data, index }: Data) => {
 export default SelectedCard;
 
 const WeatherCategoryButton = styled.div`
-  background-color: green;
   ${(props) => props.theme.flex.flexBox()};
-  width: 100%;
-  margin: 0.3rem 0 1rem 0;
-  padding: 1rem 0 0 0;
+  background-color: ${(props) => props.theme.colors.lightGray};
+  border-radius: 0.2rem;
   border: 1px solid black;
+  justify-content: space-between;
+  width: 100%;
+  height: 2rem;
+  margin: 0.3rem 0;
 `;
 
 const Wrappper = styled.div`
@@ -100,13 +109,16 @@ const DotsImage = styled.img`
   right: 0.5rem;
 `;
 
-const SelectColor = styled.div`
-  background-color: #ecc332;
+const SelectColor = styled.div.attrs((props) => ({
+  bgColor: props.color,
+}))`
+  background-color: ${(props) => props.bgColor};
   border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
 `;
+
 const Item = styled.div`
   ${(props) => props.theme.flex.flexBox()};
   flex-direction: row;
@@ -116,19 +128,11 @@ const RadioButton = styled.input.attrs({ type: "radio" })`
 `;
 
 const LabelText = styled.span`
-  ${(props) => {
-    switch (props) {
-      default:
-        return css`
-          background-color: white;
-          color: black;
-          border-radius: 1.2rem;
-          height: 1.2rem;
-          ${RadioButton}:checked + && {
-            background-color: purple;
-            color: white;
-          }
-        `;
-    }
-  }}
+  color: black;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+  ${RadioButton}:checked + && {
+    background-color: purple;
+    color: white;
+  }
 `;
