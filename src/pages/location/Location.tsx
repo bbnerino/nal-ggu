@@ -83,18 +83,18 @@ const Location = ({ setPopLocationModal }: IProps) => {
           onClick={() => { setPopLocationModal(false) }}
           alt=''
         />
-
         <form onSubmit={handleInputSubmit}>
           <section >
+            <h1 className='address_name'>주소 검색</h1>
             <input
               className='input'
               ref={inputValueRef}
               name="findAddress"
-              placeholder='주소를 입력해주세요'
+              placeholder='예)효자동, 여의공원로 68'
             ></input>
             <button className='search_btn'>검색</button>
           </section>
-          <section>
+          <section className='result_wrapper'>
             {inputAddress.length !== 0 && <ResultComponent address={inputAddress} handleListClick={handleListClick} />}
           </section>
           <section >
@@ -117,11 +117,14 @@ const Wrapper = styled.div`
   margin: auto;
   section{
     margin: auto;
-    width: 90%;
+    width: 100%;
+  }
+  .address_name{
+    margin-bottom: 0.5rem;
   }
   .input{
     height: 2rem;
-    width: 9rem;
+    width: 10rem;
     margin-right: 0.5rem;
   }
   .search_btn{
@@ -146,9 +149,12 @@ const Wrapper = styled.div`
   form{
     margin-top: 2rem;
   }
+  .result_wrapper {
+    height: 10rem;
+  }
   .result_container{
     border: 2px solid #bebdbd;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     margin-top: 1rem;
     height: 10rem;
     overflow-y: auto;
@@ -162,11 +168,17 @@ const Wrapper = styled.div`
   }
   .selected{
     margin-top: 1rem;
-    height: 1.5rem;
+    height: 2rem;
     overflow-y: hidden;
+    overflow-x: scroll;
+    width: 100%;
+    border: 2px solid #bebdbd;
+    border-radius: 5px;
+    padding-top: 5px;
   }
   .button_container{
     margin-top: 0.5rem;
+    margin-left: 1.5rem;
     display: flex;
     width: 12rem;
     height: 2rem;
