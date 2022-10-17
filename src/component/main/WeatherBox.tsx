@@ -18,10 +18,13 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
         setWeatherImg("/assets/icon/sunny.png");
         return "맑음";
       case "2":
+        setWeatherImg("/assets/icon/little_cloudy.png");
         return "구름조금";
       case "3":
+        setWeatherImg("/assets/icon/many_cloudy.png");
         return "구름많음";
       default:
+        setWeatherImg("/assets/icon/cloudy.png");
         return "흐림";
     }
   };
@@ -34,12 +37,13 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
         setWeatherImg("/assets/icon/rainy.png");
         return "비";
       case "2":
+        setWeatherImg("/assets/icon/snow and white.png");
         return "비/눈";
       case "3":
         setWeatherImg("/assets/icon/snow.png");
         return "눈";
       case "4":
-        setWeatherImg("/assets/icon/rainy.png");
+        setWeatherImg("/assets/icon/sonakki.png");
         return "소나기";
     }
   };
@@ -51,11 +55,9 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
       switch (CATEGORY) {
         case "SKY":
           setWeatherData(skyTransform(weather[CATEGORY].fcstValue));
-          setWeatherImg("/assets/icon/rainy.png");
           return;
         case "PTY":
           setWeatherData(rainTransform(weather[CATEGORY].fcstValue));
-          setWeatherImg("/assets/icon/rainy.png");
           return;
         case "TMP":
           setWeatherData(weather[CATEGORY].fcstValue);
