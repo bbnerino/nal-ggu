@@ -50,7 +50,7 @@
     /src/store => recoil을 사용하기 위해 저장된 파일들을 저장해놓은 폴더
     /src/styles => reset.css와 기본적으로 저장된 styled-components의 theme을 저장한 폴더
     
-    
+```
 📦 
 ├─ .gitignore
 ├─ .vscode
@@ -136,7 +136,7 @@
 │  └─ type.tsx
 ├─ tsconfig.json
 └─ yarn.lock
-
+```
 
 ## 과제 진행 시 주안점 작성
     - /start : 
