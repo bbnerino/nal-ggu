@@ -1,23 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useRecoilState } from "recoil";
-import { dataState, InfoData } from "../../store/state/example";
+import { dataState } from "../../store/state/example";
 
 import styled from "styled-components";
-import { Droppable, Draggable } from "react-beautiful-dnd";
 
-const Category = ({ info }: { info: InfoData[] }) => {
-  // const [info, setInfo] = useRecoilState(dataState);
-
-  // const getData = async () => {
-  //   const response = await fetch("/data.json", { method: "GET" });
-  //   const data = await response.json();
-  //   setInfo(data.data);
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+const Category = () => {
+  const [info, setInfo] = useRecoilState(dataState);
 
   const infoSort = (name: string) => {
     let newArr = [];
@@ -29,42 +18,16 @@ const Category = ({ info }: { info: InfoData[] }) => {
     return newArr;
   };
 
+  const alertProblems = () => {
+    alert("해당 기능은 아직 준비중인 서비스입니다.");
+  };
+
   return (
     <CategoryContainer>
       <WeatherCategory>
         <WeatherCategoryTitle>🌤 대기</WeatherCategoryTitle>
-        <Droppable droppableId="cardlists">
-          {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              {infoSort("대기").map((data, index) => (
-                <Draggable
-                  draggableId={`test-${data.category}`}
-                  key={data.category}
-                  index={index}
-                >
-                  {(provided) => {
-                    return (
-                      <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        <WeatherCategoryButton>
-                          <span>{data.title}</span>
-                          <DotsImage src="/assets/dots.png" alt="dots" />
-                        </WeatherCategoryButton>
-                      </div>
-                    );
-                  }}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-
         {infoSort("대기").map((data) => (
-          <WeatherCategoryButton key={data.category}>
+          <WeatherCategoryButton key={data.category} onClick={alertProblems}>
             <span>{data.title}</span>
             <DotsImage src="/assets/dots.png" alt="dots" />
           </WeatherCategoryButton>
@@ -73,7 +36,7 @@ const Category = ({ info }: { info: InfoData[] }) => {
       <WeatherCategory>
         <WeatherCategoryTitle>☔️ 강수</WeatherCategoryTitle>
         {infoSort("강수").map((data) => (
-          <WeatherCategoryButton key={data.category}>
+          <WeatherCategoryButton key={data.category} onClick={alertProblems}>
             <span>{data.title}</span>
             <DotsImage src="/assets/dots.png" alt="dots" />
           </WeatherCategoryButton>
@@ -82,7 +45,7 @@ const Category = ({ info }: { info: InfoData[] }) => {
       <WeatherCategory>
         <WeatherCategoryTitle>💨 바람</WeatherCategoryTitle>
         {infoSort("바람").map((data) => (
-          <WeatherCategoryButton key={data.category}>
+          <WeatherCategoryButton key={data.category} onClick={alertProblems}>
             <span>{data.title}</span>
             <DotsImage src="/assets/dots.png" alt="dots" />
           </WeatherCategoryButton>
@@ -110,13 +73,13 @@ const WeatherCategoryButton = styled.button`
   width: 100%;
   height: 2rem;
   margin: 0.3rem 0;
+  cursor: pointer;
 `;
 
 const DotsImage = styled.img`
   width: 1rem;
   position: absolute;
   right: 0.5rem;
-  cursor: pointer;
 `;
 
 export default Category;

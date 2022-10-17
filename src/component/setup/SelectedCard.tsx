@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { InfoData } from "../../store/state/example";
+import { dataState, InfoData } from "../../store/state/example";
 import ColorModal from "../common/ColorModal";
 import ModalFrame from "../common/ModalFrame";
 import { Draggable } from "react-beautiful-dnd";
+import { useRecoilState } from "recoil";
+
+interface Item {
+  id: string;
+  prefix: string;
+  content: string;
+  sort: string;
+  title: string;
+  size: string;
+  color: string;
+  category: string;
+}
 
 interface Data {
-  item: InfoData;
+  item: Item;
   index: number;
 }
+
 const SelectedCard = ({ item, index }: Data) => {
   const [getSize, setSize] = useState<string>("");
   const [getCate, setCate] = useState<string>("");
@@ -27,8 +40,10 @@ const SelectedCard = ({ item, index }: Data) => {
     setCate("일출");
   }, []);
 
+  const [info, setInfo] = useRecoilState(dataState);
+
   return (
-    <Draggable draggableId={item.category} index={index}>
+    <Draggable draggableId={item.id} index={index}>
       {(provided) => {
         return (
           <div
@@ -37,7 +52,7 @@ const SelectedCard = ({ item, index }: Data) => {
             ref={provided.innerRef}
           >
             <WeatherCategoryButton>
-              <p>{item.title}</p>
+              <p>{item.id}</p>
               <Wrappper>
                 <Item>
                   <label htmlFor="fstSize">

@@ -22,16 +22,16 @@ const Select = ({
   return (
     <Container>
       <Title>{prefix}</Title>
-      {/* <Droppable droppableId={`${prefix}`}>
+      <Droppable droppableId={`${prefix}`}>
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
-            {elements.map((item: InfoData, index: number) => (
+            {elements.map((item: any, index: number) => (
               <SelectedCard key={item.id} item={item} index={index} />
             ))}
             {provided.placeholder}
           </div>
         )}
-      </Droppable> */}
+      </Droppable>
 
       {/* <Title>날꾸를 마음대로 꾸며주세요!</Title>
       드롭이 일어날 영역을 래핑

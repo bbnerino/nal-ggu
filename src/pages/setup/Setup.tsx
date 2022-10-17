@@ -67,18 +67,18 @@ const Setup = () => {
     return result;
   };
 
-  const lists: any = [
-    "날꾸를 마음대로 꾸며주세요!",
-    "🌤 대기",
-    "☔️ 강수",
-    "💨 바람",
-  ];
+  const lists: (
+    | "날꾸를 마음대로 꾸며주세요!"
+    | "🌤 대기"
+    | "☔️ 강수"
+    | "💨 바람"
+  )[] = ["날꾸를 마음대로 꾸며주세요!", "🌤 대기", "☔️ 강수", "💨 바람"];
 
   const generateLists = () =>
     lists.reduce(
       (acc: any, listKey: string) => ({
         ...acc,
-        [listKey]: getItems(10, listKey),
+        [listKey]: getItems(3, listKey),
       }),
       {}
     );
@@ -88,8 +88,6 @@ const Setup = () => {
   useEffect(() => {
     setElements(generateLists());
   }, []);
-
-  console.log(elements[lists[0]]);
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
@@ -129,18 +127,18 @@ const Setup = () => {
   return (
     <div>
       <Header />
-      <DragDropContext onDragEnd={onDragEnd}>
+      {/* <DragDropContext onDragEnd={onDragEnd}>
         {lists.map((listKey: string, index: number) => (
           <Select
-            elements={elements[listKey[index]]}
+            elements={elements[listKey]}
             key={listKey}
             prefix={listKey}
             cards={info}
           />
         ))}
-      </DragDropContext>
+      </DragDropContext> */}
 
-      {/* <Category info={info} /> */}
+      <Category />
 
       <button
         onClick={() => {
