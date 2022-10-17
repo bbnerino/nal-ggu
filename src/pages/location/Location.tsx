@@ -4,6 +4,8 @@ import { atom, useRecoilState } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 import ModalFrame from '../../component/common/ModalFrame';
 import useMap from '../../hooks/useMap';
+import { xyConvert } from '../../lib/convertCoordinate';
+
 const { persistAtom } = recoilPersist()
 interface HandleSubmitEvent {
   (e: React.SyntheticEvent<HTMLFormElement>): void
@@ -44,8 +46,6 @@ const state = atom({
 });
 
 const Location = () => {
-  return <div>Location</div>;
-};
   const [inputAddress, setInputAddress] = useState('');
   const [selectedAddress, setSelectedAddress] = useState(['']);
   const [, setSelectedFinalAddress] = useRecoilState(state)
@@ -64,7 +64,8 @@ const Location = () => {
   const handleListClick: HandleClickEvent = (e) => {
     const target = e.target as HTMLFormElement;
     console.log(target);
-    setSelectedAddress([String(target.textContent), String(target.dataset.x), String(target.dataset.y)])
+    const convertedGrid = xyConvert(Number(target.dataset.y), Number(target.dataset.x));
+    setSelectedAddress([String(target.textContent), String(convertedGrid.x), String(convertedGrid.y)])
   }
 
   const handleButtonConfirm: HandleClickEvent = (e) => {

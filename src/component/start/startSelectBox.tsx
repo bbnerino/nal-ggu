@@ -29,16 +29,25 @@ const Wrapper = styled.div<ColorProps>`
   width: 100%;
   margin-bottom: 2rem;
   border-radius: 30px;
+  @media screen and (max-width: 32rem) {
+    height: 3rem;
+  }
 `;
 
 const Icon = styled.div`
   font-size: 2.5rem;
   margin-right: 1rem;
+  @media screen and (max-width: 32rem) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Title = styled.span`
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  @media screen and (max-width: 32rem) {
+    font-size: 0.5rem;
+  }
 `;
 
 export default StartSelectBox;
