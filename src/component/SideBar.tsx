@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface SideBarType {
@@ -7,6 +8,7 @@ interface SideBarType {
 }
 
 const SideBar = ({ isOpenSideBar, hideSideBar }: SideBarType) => {
+  const navigate = useNavigate()
   return (
     <>
       <SideBarContainer isOpenSideBar={isOpenSideBar}>
@@ -14,7 +16,7 @@ const SideBar = ({ isOpenSideBar, hideSideBar }: SideBarType) => {
           <div className="logo-container">
             <img className="logo" src="/assets/sun.png" />
           </div>
-          <button className="custom-btn">커스텀 설정</button>
+          <button onClick={()=>{navigate('/setup')}} className="custom-btn">커스텀 설정</button>
         </SideBarNav>
         <SideBarBlank isOpenSideBar={isOpenSideBar} onClick={hideSideBar} />
       </SideBarContainer>

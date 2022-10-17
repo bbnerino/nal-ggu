@@ -212,7 +212,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-left: 7rem;
   padding-right: 7rem;
-  cursor: pointer;
   user-select: none;
 `;
 
