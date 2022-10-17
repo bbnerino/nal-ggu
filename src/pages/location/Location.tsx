@@ -1,13 +1,11 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { atom, useRecoilState } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import ModalFrame from "../../component/common/ModalFrame";
+import LocationModalFrame from "../../component/location/LocationModalFrame";
 import useMap from "../../hooks/useMap";
 import { xyConvert } from "../../lib/convertCoordinate";
+import { locationState } from "../main/Main";
 
-const { persistAtom } = recoilPersist();
 interface HandleSubmitEvent {
   (e: React.SyntheticEvent<HTMLFormElement>): void;
 }
@@ -44,12 +42,6 @@ const ResultComponent = ({ address, handleListClick }: Props) => {
   );
 };
 
-const state = atom({
-  key: "selectedInformation",
-  default: [""],
-  effects_UNSTABLE: [persistAtom],
-});
-
 interface IProps {
   setPopLocationModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -57,7 +49,7 @@ interface IProps {
 const Location = ({ setPopLocationModal }: IProps) => {
   const [inputAddress, setInputAddress] = useState("");
   const [selectedAddress, setSelectedAddress] = useState([""]);
-  const [, setSelectedFinalAddress] = useRecoilState(state);
+  const [, setSelectedFinalAddress] = useRecoilState(locationState);
   const inputValueRef = useRef<HTMLInputElement>(null);
 
   const handleInputSubmit: HandleSubmitEvent = (e) => {
@@ -72,7 +64,7 @@ const Location = ({ setPopLocationModal }: IProps) => {
 
   const handleListClick: HandleClickEvent = (e) => {
     const target = e.target as HTMLFormElement;
-    console.log(target);
+    if (target.className === "result_container") return;
     const convertedGrid = xyConvert(
       Number(target.dataset.y),
       Number(target.dataset.x)
@@ -85,82 +77,111 @@ const Location = ({ setPopLocationModal }: IProps) => {
   };
 
   const handleButtonConfirm: HandleClickEvent = (e) => {
-    setSelectedFinalAddress(selectedAddress);
+    console.log(selectedAddress);
+    if (selectedAddress.length !== 1) {
+      setSelectedFinalAddress(selectedAddress);
+      setPopLocationModal(false);
+    }
+    console.log(selectedAddress);
   };
 
   return (
-    <ModalFrame>
+    <LocationModalFrame>
       <Wrapper>
-        <button
+        <img
+          className="close"
+          src="/assets/close.png"
           onClick={() => {
             setPopLocationModal(false);
           }}
-          className="close"
-        >
-          X
-        </button>
+          alt=""
+        />
         <form onSubmit={handleInputSubmit}>
           <section>
+            <h1 className="address_name">주소 검색</h1>
             <input
+              className="input"
               ref={inputValueRef}
               name="findAddress"
-              placeholder="주소를 입력해주세요"
+              placeholder="예)효자동, 여의공원로 68"
             ></input>
             <button className="search_btn">검색</button>
           </section>
-          {inputAddress.length !== 0 && (
-            <ResultComponent
-              address={inputAddress}
-              handleListClick={handleListClick}
-            />
-          )}
+          <section className="result_wrapper">
+            {inputAddress.length !== 0 && (
+              <ResultComponent
+                address={inputAddress}
+                handleListClick={handleListClick}
+              />
+            )}
+          </section>
           <section>
             <div className="selected">{selectedAddress?.[0]}</div>
             <div>
-              <Link to="/main">
-                <div className="button_container">
-                  <button
-                    className="cancle_button"
-                    onClick={() => {
-                      setPopLocationModal(false);
-                    }}
-                  >
-                    취소
-                  </button>
-                  <button className="save_button" onClick={handleButtonConfirm}>
-                    저장
-                  </button>
-                </div>
-              </Link>
+              <div className="button_container">
+                <button
+                  className="cancel_button"
+                  onClick={() => {
+                    setPopLocationModal(false);
+                  }}
+                >
+                  취소
+                </button>
+                <button className="save_button" onClick={handleButtonConfirm}>
+                  저장
+                </button>
+              </div>
             </div>
           </section>
         </form>
       </Wrapper>
-    </ModalFrame>
+    </LocationModalFrame>
   );
 };
+
 const Wrapper = styled.div`
   width: 80%;
   margin: auto;
   section {
     margin: auto;
-    width: 90%;
+    width: 100%;
+  }
+  .address_name {
+    margin-bottom: 0.5rem;
+  }
+  .input {
+    height: 2rem;
+    width: 10rem;
+    margin-right: 0.5rem;
   }
   .search_btn {
+    /* margin-right: 1rem; */
+    height: 2rem;
+    width: 3rem;
+    font-size: 15px;
     border-radius: 5px;
-    margin-left: 1rem;
+    border: none;
+    background-color: #6d3dff;
+    color: white;
+    cursor: pointer;
   }
   .close {
     position: absolute;
-    right: 1rem;
-    border: none;
+    right: 16px;
+    top: 16px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.8;
   }
   form {
     margin-top: 2rem;
   }
+  .result_wrapper {
+    height: 10rem;
+  }
   .result_container {
     border: 2px solid #bebdbd;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     margin-top: 1rem;
     height: 10rem;
     overflow-y: auto;
@@ -174,11 +195,17 @@ const Wrapper = styled.div`
   }
   .selected {
     margin-top: 1rem;
-    height: 1.5rem;
+    height: 2rem;
     overflow-y: hidden;
+    overflow-x: scroll;
+    width: 100%;
+    border: 2px solid #bebdbd;
+    border-radius: 5px;
+    padding-top: 5px;
   }
   .button_container {
     margin-top: 0.5rem;
+    margin-left: 1.5rem;
     display: flex;
     width: 12rem;
     height: 2rem;
@@ -186,9 +213,10 @@ const Wrapper = styled.div`
     button {
       width: 4rem;
       border-radius: 5px;
-      border: 0.2px solid "#b5b4b43";
+      /* border: 0.2px solid '#b5b4b43'; */
+      border: none;
       color: white;
-      &.cancle_button {
+      &.cancel_button {
         color: #333;
       }
       &.save_button {

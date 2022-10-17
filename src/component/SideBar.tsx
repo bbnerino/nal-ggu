@@ -47,8 +47,7 @@ const SideBarContainer = styled.div`
 `;
 
 const SideBarNav = styled.div`
-  background: linear-gradient(to top, white, #9292921c);
-  background-color: #edebed;
+  background-color: #ffffff;
   width: calc(100% * 0.6);
   animation: 0.7s
     ${(props: SideBarType) => (props.isOpenSideBar ? "showUp" : "showOut")}
@@ -79,7 +78,7 @@ const SideBarNav = styled.div`
     height: calc(100% * 0.3);
     display: flex;
     justify-content: center;
-    background-color: #ffdbfa;
+    background-color: #ffffff;
 
     .logo {
       height: calc(100% * 0.5);
@@ -93,8 +92,10 @@ const SideBarNav = styled.div`
     cursor: pointer;
     height: 40px;
     border: none;
-    font-size: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
     margin-top: 50px;
+    color: #454647;
     background-color: transparent;
   }
 `;
@@ -102,6 +103,7 @@ const SideBarNav = styled.div`
 const SideBarBlank = styled.div`
   width: calc(100% - 100% * 0.6);
   background: linear-gradient(to left, #4f4e4f, black);
+  cursor: pointer;
   animation: 0.3s
     ${(props: SideBarType) => (props.isOpenSideBar ? "fadein" : "fadeout")}
     forwards;
