@@ -6,10 +6,10 @@ import ModalFrame from "../common/ModalFrame";
 import { Draggable } from "react-beautiful-dnd";
 
 interface Data {
-  data: InfoData;
+  item: InfoData;
   index: number;
 }
-const SelectedCard = ({ data, index }: Data) => {
+const SelectedCard = ({ item, index }: Data) => {
   const [getSize, setSize] = useState<string>("");
   const [getCate, setCate] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -25,14 +25,10 @@ const SelectedCard = ({ data, index }: Data) => {
       // size 2
     }
     setCate("일출");
-  });
+  }, []);
 
   return (
-    <Draggable
-      draggableId={`test-${data.category}`}
-      index={index}
-      key={`test-${data.category}`}
-    >
+    <Draggable draggableId={item.category} index={index}>
       {(provided) => {
         return (
           <div
@@ -41,7 +37,7 @@ const SelectedCard = ({ data, index }: Data) => {
             ref={provided.innerRef}
           >
             <WeatherCategoryButton>
-              <p>{data.title}</p>
+              <p>{item.title}</p>
               <Wrappper>
                 <Item>
                   <label htmlFor="fstSize">

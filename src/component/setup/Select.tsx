@@ -7,14 +7,34 @@ import SelectedCard from "./SelectedCard";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-const Select = ({ cards }: any) => {
+const Select = ({
+  cards,
+  prefix,
+  elements,
+}: {
+  cards: InfoData[];
+  prefix: string;
+  elements: string[];
+}) => {
   const [info, setInfo] = useRecoilState(dataState);
   const [test, setTest] = useRecoilState(testState);
 
   return (
     <Container>
-      <Title>날꾸를 마음대로 꾸며주세요!</Title>
-      {/* 드롭이 일어날 영역을 래핑 */}
+      <Title>{prefix}</Title>
+      {/* <Droppable droppableId={`${prefix}`}>
+        {(provided) => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            {elements.map((item: InfoData, index: number) => (
+              <SelectedCard key={item.id} item={item} index={index} />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable> */}
+
+      {/* <Title>날꾸를 마음대로 꾸며주세요!</Title>
+      드롭이 일어날 영역을 래핑
       <Droppable droppableId="cardlists">
         {(provided) => (
           <div
@@ -28,7 +48,7 @@ const Select = ({ cards }: any) => {
             {provided.placeholder}
           </div>
         )}
-      </Droppable>
+      </Droppable> */}
     </Container>
   );
 };
