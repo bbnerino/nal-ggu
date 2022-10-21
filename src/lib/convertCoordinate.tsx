@@ -1,5 +1,5 @@
 interface Convert {
-  (v1: number, v2: number): { x: number, y: number }
+  (v1: number, v2: number): { x: number, y: number, lat: number, lon: number }
 }
 
 export const xyConvert: Convert = (v1, v2) => {
@@ -27,8 +27,8 @@ export const xyConvert: Convert = (v1, v2) => {
   ro = re * sf / Math.pow(ro, sn);
   let rs: any = {};
 
-  // rs['lat'] = v1;
-  // rs['lng'] = v2;
+  rs['lat'] = v1;
+  rs['lng'] = v2;
   let ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
   ra = re * sf / Math.pow(ra, sn);
   let theta = v2 * DEGRAD - olon;

@@ -4,7 +4,7 @@ import { recoilPersist } from "recoil-persist";
 import styled from "styled-components";
 import MainHeader from "../../component/main/Header";
 import WeatherBox from "../../component/main/WeatherBox";
-import { getInformation } from "../../lib/api";
+import { getWeatherInformation, getAstronomyInformation } from "../../lib/api";
 import { UserWeather, Weather } from "../../type";
 import { StartData, startState } from "../../store/state/startData";
 
@@ -12,7 +12,7 @@ const { persistAtom } = recoilPersist();
 
 export const locationState = atom({
   key: "selectedInformation",
-  default: ["경기도 성남시 분당구 판교동", "62", "123"],
+  default: ["경기도 성남시 분당구 판교동", "62", "123", "127.0986189", "37.389844"],
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -160,8 +160,10 @@ const Main = () => {
 
     async function test() {
       try {
-        const { item } = await getInformation(x, y);
+        const { item } = await getWeatherInformation(x, y);
         console.log(item);
+        const response = await getAstronomyInformation('127.0986189', '37.389844')
+        console.log(response)
         item.forEach((data: Weather) => {
           weatherArray = Object.assign(weatherArray, { [data.category]: data });
         });
