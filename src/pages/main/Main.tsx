@@ -8,7 +8,8 @@ import { locationState, startState } from "../../store/state/startData";
 import { MOCKUP_ASTRONOMY_DATA, MOCKUP_WEATHER_DATA } from "../../utils/constants";
 
 const Main = () => {
-  const [startData, setStartData] = useRecoilState(startState);
+  const [userSelectWeather, setUserSelectWeather] = useRecoilState(startState);
+  console.log(userSelectWeather);
   const [selectedFinalAddress, setSelectedFinalAddress] =
     useRecoilState(locationState);
   console.log(selectedFinalAddress);
@@ -17,9 +18,6 @@ const Main = () => {
 
   const [weather, setWeather] = useState<any>({});
 
-  const [userSelectWeather, setUserSelectWeather] =
-    useState<StartData[]>(startData);
-  console.log(userSelectWeather);
   useEffect(() => {
     let weatherArray: any = {};
 
@@ -41,7 +39,7 @@ const Main = () => {
       console.log(weatherArray);
     })
 
-  }, [x, y, lat, lon]);
+  }, [name]);
 
   return (
     <Wrapper className="wr">
