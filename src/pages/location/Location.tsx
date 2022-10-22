@@ -4,8 +4,7 @@ import styled from "styled-components";
 import LocationModalFrame from "../../component/location/LocationModalFrame";
 import useMap from "../../hooks/useMap";
 import { xyConvert } from "../../lib/convertCoordinate";
-import { locationState } from "../main/Main";
-import { getAstronomyInformation } from "../../lib/api";
+import { locationState } from "../../store/state/startData";
 
 interface HandleSubmitEvent {
   (e: React.SyntheticEvent<HTMLFormElement>): void;
@@ -19,10 +18,6 @@ interface Props {
   address: string;
   handleListClick: HandleClickEvent;
 }
-
-
-
-
 
 const ResultComponent = ({ address, handleListClick }: Props) => {
   const resultArray = useMap({ address });
