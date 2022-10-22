@@ -250,18 +250,32 @@ const Start = () => {
     [
       {
         sort: "대기",
-        category: "SKY",
-        title: "하늘상태",
+        category: "sunrise",
+        title: "일출",
         size: "2",
         color: colorChip[Math.floor(Math.random() * colorChip.length)],
       },
       {
         sort: "대기",
-        category: "TMP",
-        title: "1시간 기온",
+        category: "sunset",
+        title: "일몰",
         size: "2",
         color: colorChip[Math.floor(Math.random() * colorChip.length)],
       },
+      // {
+      //   sort: "대기",
+      //   category: "SKY",
+      //   title: "하늘상태",
+      //   size: "2",
+      //   color: colorChip[Math.floor(Math.random() * colorChip.length)],
+      // },
+      // {
+      //   sort: "대기",
+      //   category: "TMP",
+      //   title: "1시간 기온",
+      //   size: "2",
+      //   color: colorChip[Math.floor(Math.random() * colorChip.length)],
+      // },
       {
         sort: "비",
         category: "POP",

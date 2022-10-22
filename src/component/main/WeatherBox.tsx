@@ -105,6 +105,16 @@ const WeatherBox = ({ userWeather, weather }: Props) => {
           setWeatherImg("/assets/icon/wind.png");
           setWeatherUnit("m/s");
           return;
+        case "sunrise":
+          setWeatherData(weather[CATEGORY].value.slice(0, 2) + ':' + weather[CATEGORY].value.slice(2));
+          setWeatherImg("/assets/icon/sunrise.png");
+          setWeatherUnit("");
+          return;
+        case "sunset":
+          setWeatherData(weather[CATEGORY].value.slice(0, 2) + ':' + weather[CATEGORY].value.slice(2));
+          setWeatherImg("/assets/icon/sunset.png");
+          setWeatherUnit("");
+          return;
         default:
           return setWeatherData(weather[CATEGORY].fcstValue);
       }
