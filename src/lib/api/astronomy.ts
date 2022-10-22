@@ -18,7 +18,16 @@ export const getAstronomyInformation = async (lon: string, lat: string) => {
 		},
 	});
 	console.log(response.data.response.body.items.item);
-  const { sunrise, sunset } = response.data.response.body.items.item;
+	const { sunrise, sunset } = response.data.response.body.items.item;
 
-  return { sunrise: sunrise.trim(), sunset: sunset.trim()}
+	return [
+		{
+			category: "sunrise",
+			value: sunrise.trim(),
+		},
+		{
+			category: "sunset",
+			value: sunset.trim(),
+		},
+	];
 };
