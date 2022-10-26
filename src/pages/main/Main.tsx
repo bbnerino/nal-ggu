@@ -1,182 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { atom, useRecoilState } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import MainHeader from "../../component/main/Header";
 import WeatherBox from "../../component/main/WeatherBox";
-import { getInformation } from "../../lib/api";
-import { UserWeather, Weather } from "../../type";
-import { StartData, startState } from "../../store/state/startData";
-
-const { persistAtom } = recoilPersist();
-
-export const locationState = atom({
-  key: "selectedInformation",
-  default: ["경기도 성남시 분당구 판교동", "62", "123"],
-  effects_UNSTABLE: [persistAtom],
-});
+import { getAstronomyInformation, getWeatherInformation } from "../../lib/api";
+import { locationState, startState } from "../../store/state/startData";
+import { MOCKUP_ASTRONOMY_DATA, MOCKUP_WEATHER_DATA } from "../../utils/constants";
 
 const Main = () => {
-  const [startData, setStartData] = useRecoilState(startState);
+  const [userSelectWeather, setUserSelectWeather] = useRecoilState(startState);
+  console.log(userSelectWeather);
   const [selectedFinalAddress, setSelectedFinalAddress] =
     useRecoilState(locationState);
   console.log(selectedFinalAddress);
-  const [name, x, y] = selectedFinalAddress;
-  const location = { name, x, y };
-  const random = () => {
-    return Math.round(Math.random()) + 1;
-  };
+  const [name, x, y, lon, lat] = selectedFinalAddress;
+  const location = { name, x, y, lon, lat };
 
   const [weather, setWeather] = useState<any>({});
 
-  const [userSelectWeather, setUserSelectWeather] =
-    useState<StartData[]>(startData);
-
   useEffect(() => {
-    let weatherData: Weather[] = [
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "TMP",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "20",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "UUU",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "1.8",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "VVV",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "-0.8",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "VEC",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "294",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "WSD",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "1.9",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "SKY",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "4",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "PTY",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "0",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "POP",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "30",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "WAV",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "0",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "PCP",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "강수없음",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "REH",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "65",
-        nx: 55,
-        ny: 127,
-      },
-      {
-        baseDate: "20221016",
-        baseTime: "1400",
-        category: "SNO",
-        fcstDate: "20221016",
-        fcstTime: "1500",
-        fcstValue: "적설없음",
-        nx: 55,
-        ny: 127,
-      },
-    ];
+    let weatherArray: any = {};
 
-    let weatherArray = {};
+    Promise.all(
+      [getWeatherInformation(x, y), getAstronomyInformation(lon, lat)]
+    ).then(response => response.forEach((data: Weather[] | Astronomy[]) => {
+      console.log(data);
+      data.forEach((val: any) => {
+        weatherArray[val.category] = val;
+      })
+      setWeather(weatherArray);
+      console.log(weatherArray);
+    })).catch(error => {
+      console.log(error);
+      [...MOCKUP_WEATHER_DATA, ...MOCKUP_ASTRONOMY_DATA].forEach((val) => {
+        weatherArray[val.category] = val;
+      })
+      setWeather(weatherArray)
+      console.log(weatherArray);
+    })
 
-    async function test() {
-      try {
-        const { item } = await getInformation(x, y);
-        console.log(item);
-        item.forEach((data: Weather) => {
-          weatherArray = Object.assign(weatherArray, { [data.category]: data });
-        });
-      } catch (error) {
-        console.log(error);
-        weatherData.forEach((data) => {
-          weatherArray = Object.assign(weatherArray, { [data.category]: data });
-        });
-      } finally {
-        console.log(weatherArray);
-        setWeather(weatherArray);
-      }
-    }
-    test();
-  }, [x, y]);
+  }, [name]);
 
   return (
     <Wrapper className="wr">

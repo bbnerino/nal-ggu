@@ -4,7 +4,7 @@ import styled from "styled-components";
 import LocationModalFrame from "../../component/location/LocationModalFrame";
 import useMap from "../../hooks/useMap";
 import { xyConvert } from "../../lib/convertCoordinate";
-import { locationState } from "../main/Main";
+import { locationState } from "../../store/state/startData";
 
 interface HandleSubmitEvent {
   (e: React.SyntheticEvent<HTMLFormElement>): void;
@@ -69,10 +69,13 @@ const Location = ({ setPopLocationModal }: IProps) => {
       Number(target.dataset.y),
       Number(target.dataset.x)
     );
+    console.log(convertedGrid);
     setSelectedAddress([
       String(target.textContent),
       String(convertedGrid.x),
       String(convertedGrid.y),
+      String(convertedGrid.lon),
+      String(convertedGrid.lat),
     ]);
   };
 
