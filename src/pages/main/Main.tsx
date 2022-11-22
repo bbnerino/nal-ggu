@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import MainHeader from "../../component/main/Header";
@@ -16,7 +17,7 @@ const Main = () => {
   const [name, x, y, lon, lat] = selectedFinalAddress;
   const location = { name, x, y, lon, lat };
 
-  const [weather, setWeather] = useState<any>({});
+  const [weather, setWeather] = useState({});
 
   useEffect(() => {
     let weatherArray: any = {};
@@ -41,17 +42,56 @@ const Main = () => {
 
   }, [name]);
 
+  const handleChangeOrder = useCallback((result: DropResult) => {
+    const { destination, source } = result;
+    if (!destination) return
+    if (
+      destination.droppableId === source.droppableId &&
+      source.index === destination.index
+    )
+      return;  
+    const newUserSelectWeather = [...userSelectWeather];
+    const [cutItem] = newUserSelectWeather.splice(result.source.index, 1);
+    newUserSelectWeather.splice(destination.index, 0, cutItem)
+    setUserSelectWeather(newUserSelectWeather)
+  }, [userSelectWeather])
+
   return (
     <Wrapper className="wr">
       <MainHeader location={location.name} />
-      <WeatherWrapper>
-        {userSelectWeather.map((userWeather) => (
+      <WeatherWrapper className="testwrapper">
+        {/* {userSelectWeather.map((userWeather) => (
           <WeatherBox
             userWeather={userWeather}
             weather={weather}
             key={userWeather.category}
           />
-        ))}
+        ))} */}
+        <DragDropContext onDragEnd={handleChangeOrder}>
+          <Droppable droppableId="infoList">
+            {provided => (
+              <div className="infoList" {...provided.droppableProps} ref={provided.innerRef}>
+                {userSelectWeather.map((userWeather, i) => (
+                  <Draggable draggableId={userWeather.category} index={i} key={userWeather.category}>
+                    {(provided, Snapshot) => {
+                      return (
+                        <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                          <WeatherBox
+                            // isDragging={Snapshot.isDragging}
+                            userWeather={userWeather}
+                            weather={weather}
+                            key={userWeather.category}
+                          />
+                        </div>
+                      )
+                    }}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </WeatherWrapper>
     </Wrapper>
   );
