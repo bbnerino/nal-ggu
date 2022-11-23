@@ -59,7 +59,7 @@ const Main = () => {
   return (
     <Wrapper className="wr">
       <MainHeader location={location.name} />
-      <WeatherWrapper className="testwrapper">
+      <WeatherWrapper>
         {/* {userSelectWeather.map((userWeather) => (
           <WeatherBox
             userWeather={userWeather}
@@ -105,6 +105,11 @@ const WeatherWrapper = styled.article`
   display: flex;
   flex-wrap: wrap;
   /* justify-content: space-around; */
+  .infoList {
+    width: 100%;
+  }
 `;
+
+
 
 export default Main;
